@@ -12,9 +12,10 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # テンプレートフォルダをカレントディレクトリに設定
-app = Flask(__name__, static_folder='static', template_folder='.')
+app = Flask(__name__, static_folder='public/static', template_folder='public')
 PORT = 8132
-PUBLIC_DIR = '.' 
+PUBLIC_DIR = 'public' 
+
 
 # ご要件の表示名マッピング
 SUBJECT_MAP = {

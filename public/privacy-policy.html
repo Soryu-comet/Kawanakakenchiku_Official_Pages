@@ -39,8 +39,45 @@
      お問い合わせ
     </a>
    </nav>
-  </div>
+  
+   <button id="menu-btn" class="md:hidden z-50 focus:outline-none group relative w-10 h-10 flex flex-col justify-center items-center magnetic-btn">
+    <div class="w-7 h-[1px] bg-brand-dark mb-2 transition-all duration-300" id="bar1"></div>
+    <div class="w-7 h-[1px] bg-brand-dark mb-2 transition-all duration-300" id="bar2"></div>
+    <div class="w-7 h-[1px] bg-brand-dark transition-all duration-300" id="bar3"></div>
+   </button>
+</div>
  </header>
+ <!-- Mobile Menu -->
+ <div id="mobile-menu" class="fixed inset-0 bg-brand-light z-40 hidden flex-col justify-start pt-36 px-10 opacity-0 transition-opacity duration-300 overflow-y-auto">
+  <nav class="w-full">
+   <ul class="space-y-10 pb-16">
+    <li class="group border-b border-gray-200 pb-6">
+     <a href="index.html" class="block magnetic-btn">
+      <span class="block text-xs font-bold text-brand-green tracking-widest mb-2 transition-transform duration-300 group-hover:translate-x-1">HOME</span>
+      <span class="block text-2xl font-serif text-brand-dark transition-colors duration-300 group-hover:text-brand-green">ホーム</span>
+     </a>
+    </li>
+    <li class="group border-b border-gray-200 pb-6">
+     <a href="about-pellet.html" class="block magnetic-btn">
+      <span class="block text-xs font-bold text-brand-green tracking-widest mb-2 transition-transform duration-300 group-hover:translate-x-1">ABOUT PELLET</span>
+      <span class="block text-2xl font-serif text-brand-dark transition-colors duration-300 group-hover:text-brand-green">ペレットとは</span>
+     </a>
+    </li>
+    <li class="group border-b border-gray-200 pb-6">
+     <a href="index.html#services" class="block magnetic-btn">
+      <span class="block text-xs font-bold text-brand-green tracking-widest mb-2 transition-transform duration-300 group-hover:translate-x-1">SERVICES</span>
+      <span class="block text-2xl font-serif text-brand-dark transition-colors duration-300 group-hover:text-brand-green">事業内容</span>
+     </a>
+    </li>
+    <li class="pt-8">
+     <a href="contact.html" class="flex items-center justify-center w-full py-4 bg-brand-orange text-white text-base font-medium rounded-full hover:bg-[#b04d13] transition-all shadow-md tracking-widest magnetic-btn">
+      お問い合わせ
+     </a>
+    </li>
+   </ul>
+  </nav>
+ </div>
+
 
  <main class="flex-grow pt-32 pb-32">
   <div class="max-w-4xl mx-auto px-6 fade-in-up">

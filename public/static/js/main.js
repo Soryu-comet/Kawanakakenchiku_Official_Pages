@@ -205,7 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }
         } else {
-            const isWhiteHeaderPage = document.querySelector('.hero-section');
+            const isWhiteHeaderPage = document.querySelector('.hero-section, .about-hero');
             if (isWhiteHeaderPage) {
                 header.classList.remove('header-glass', 'py-4');
                 header.classList.add('bg-transparent', 'py-6');
