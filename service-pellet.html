@@ -1,0 +1,181 @@
+﻿<!DOCTYPE html>
+<html lang="ja">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>ペレット事業 | 川中建築</title>
+ 
+ <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="static/css/style.css">
+ <link rel="stylesheet" href="static/css/tailwind-output.css">
+ 
+ <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+ <script src="https://unpkg.com/split-type"></script>
+ <script src="static/js/main.js" defer></script>
+</head>
+<body class="bg-brand-light text-brand-dark antialiased flex flex-col min-h-screen">
+ <div id="custom-cursor"></div>
+
+ <!-- Page Transition Overlay -->
+ <div id="page-transition" class="fixed inset-0 bg-brand-dark z-[9999] pointer-events-none origin-bottom translate-y-full transition-transform duration-700 ease-in-out flex items-center justify-center">
+  <div class="w-12 h-12 border-4 border-white/20 border-t-brand-orange rounded-full animate-spin transition-opacity duration-300 opacity-0" id="page-transition-spinner"></div>
+ </div>
+ <!-- Ambient Canvas -->
+ <canvas id="ambient-canvas" class="fixed inset-0 pointer-events-none z-[-1] opacity-50"></canvas>
+
+ <header class="fixed w-full z-[100] top-0 transition-all duration-300 py-4 header-glass" id="header">
+  <div class="container mx-auto px-6 max-w-7xl flex justify-between items-center">
+   <a href="index.html" class="z-50 relative magnetic-btn">
+    <img src="static/images/image_b94ab1.png" alt="川中建築" id="header-logo-img" class="h-9 md:h-11 transition-all duration-300">
+   </a>
+   
+   <nav class="hidden md:flex items-center space-x-12 z-50">
+    <a href="index.html" class="font-medium text-brand-dark hover:text-brand-green transition-colors nav-link magnetic-btn tracking-widest text-[13px]">ホーム</a>
+    <a href="about-pellet.html" class="font-medium text-brand-dark hover:text-brand-green transition-colors nav-link magnetic-btn tracking-widest text-[13px]">ペレットとは</a>
+    <a href="index.html#services" class="font-medium text-brand-dark hover:text-brand-green transition-colors nav-link magnetic-btn tracking-widest text-[13px]">事業内容</a>
+    <a href="contact.html" class="magnetic-btn ml-6 px-10 py-4 bg-brand-orange text-white font-medium rounded-full hover:bg-[#b04d13] transition-all shadow-md tracking-widest text-[13px]">
+     お問い合わせ
+    </a>
+   </nav>
+  </div>
+ </header>
+
+ <main class="flex-grow pt-32 pb-32">
+  <div class="max-w-5xl mx-auto px-6 fade-in-up">
+
+   <!-- ペレット紹介ページへの誘導バナー -->
+   <a href="about-pellet.html" class="magnetic-btn group flex items-center justify-between w-full bg-brand-green/5 border border-brand-green/15 hover:border-brand-green/30 rounded-2xl p-6 md:p-7 mb-16 transition-all hover:shadow-soft fade-in-up">
+    <div class="flex items-center gap-4">
+     <div class="w-10 h-10 rounded-full bg-brand-green/10 flex items-center justify-center shrink-0">
+      <svg class="w-5 h-5 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+     </div>
+     <div>
+      <span class="text-brand-dark text-[14px] md:text-[15px] font-medium block tracking-wider">ペレットって何？という方へ</span>
+      <span class="text-brand-gray text-[12px] tracking-wider">木質ペレットの基礎知識・薪との違い・用途などをわかりやすく解説</span>
+     </div>
+    </div>
+    <div class="w-8 h-8 rounded-full border border-brand-green/30 flex items-center justify-center shrink-0 ml-4 group-hover:bg-brand-green group-hover:border-transparent transition-all duration-300">
+     <svg class="w-4 h-4 text-brand-green group-hover:text-white group-hover:translate-x-0.5 transition-all duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+    </div>
+   </a>
+   
+   <div class="text-center mb-20 fade-in-up">
+    <span class="text-brand-green font-bold tracking-[0.3em] text-[11px] md:text-[13px] uppercase mb-4 block">Pellet Stoves & Fuel</span>
+    <h1 class="font-serif text-3xl md:text-5xl font-medium mb-6 text-brand-dark tracking-wide">ペレット事業</h1>
+    <p class="text-brand-gray text-[14px] leading-[2] tracking-wider max-w-2xl mx-auto">
+     環境にも人にも優しい「火のある暮らし」をご提供します。<br>地産地消のエネルギーで、地球に還るあたたかさを。
+    </p>
+   </div>
+
+   <div class="h-[400px] md:h-[500px] w-full rounded-3xl overflow-hidden mb-24 shadow-soft relative fade-in-up">
+    <img src="static/images/DSC04947.JPG" alt="ペレットストーブ設置事例" class="absolute inset-0 w-full h-full object-cover">
+   </div>
+
+   <!-- Section 1: Stove Installation -->
+   <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mb-24 items-center fade-in-up">
+    <!-- Image (Left on PC, Top on Mobile) -->
+    <div class="order-1 h-80 rounded-2xl overflow-hidden shadow-inner-soft">
+     <img src="static/images/DSC04947.JPG" alt="ストーブ施工例" class="w-full h-full object-cover">
+    </div>
+    <!-- Text (Right on PC, Bottom on Mobile) -->
+    <div class="order-2">
+     <h2 class="font-serif text-3xl font-medium mb-6 text-brand-dark border-b border-gray-100 pb-4">ペレットストーブの施工・販売</h2>
+     <p class="text-brand-gray text-[14px] leading-loose tracking-wider mb-8">
+      化石燃料に依存しない次世代の暖房器具として注目のペレットストーブ。当社では、お客様の住空間やライフスタイルに合わせた最適な機種のご提案から、設置工事、その後の細やかなアフターメンテナンスまで、すべて自社で責任を持って対応いたします。
+     </p>
+     <ul class="space-y-4 text-brand-dark text-[14px] font-medium tracking-wider">
+      <li class="flex items-center"><span class="w-1.5 h-1.5 bg-brand-green rounded-full mr-4"></span>さいかい産業</li>
+      <li class="flex items-center"><span class="w-1.5 h-1.5 bg-brand-green rounded-full mr-4"></span>シモタニ</li>
+      <li class="flex items-center"><span class="w-1.5 h-1.5 bg-brand-green rounded-full mr-4"></span>西村精工</li>
+      <li class="flex items-center"><span class="w-1.5 h-1.5 bg-brand-green rounded-full mr-4"></span>豊実精工（Homi）</li>
+     </ul>
+    </div>
+   </div>
+
+   <!-- Section 2: Fuel Manufacturing -->
+   <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mb-24 items-stretch fade-in-up">
+    <!-- Text (Left on PC, Bottom on Mobile) -->
+    <div class="order-2 md:order-1 bg-brand-green text-white rounded-2xl p-10 flex flex-col justify-center relative overflow-hidden shadow-soft">
+     <div class="absolute -right-20 -top-20 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl"></div>
+     <h2 class="font-serif text-2xl font-medium mb-6 border-b border-white/20 pb-4">自社工場での燃料製造</h2>
+     <p class="text-white/90 text-[14px] leading-loose tracking-wider mb-8">
+      ストーブを普及させるだけで終わらず、その先の「燃料」から自分たちで生み出すことが真の循環型社会への第一歩だと考えています。<br><br>
+      当社では、地域で発生する間伐材や製材端材を利用し、自社工場で良質なペレット燃料を日々製造・販売しています。地元の木を使い、地元で暖をとる。完全なる「エネルギーの地産地消」です。
+     </p>
+     <div class="mt-auto pt-4">
+      <a href="contact.html" class="inline-flex items-center justify-center w-full md:w-auto px-8 py-4 bg-white text-brand-green font-medium rounded-full hover:bg-brand-light transition-all shadow-md tracking-widest text-[13px] magnetic-btn">
+       製品を見る・ご相談
+      </a>
+     </div>
+    </div>
+    <!-- Image Placeholder (Right on PC, Top on Mobile) -->
+    <div class="order-1 md:order-2 h-full min-h-[300px] w-full bg-gray-100 rounded-2xl overflow-hidden shadow-inner-soft relative group border-2 border-gray-300 border-dashed flex flex-col items-center justify-center transition-colors hover:bg-gray-200">
+     <div class="text-brand-gray text-center p-6 z-10">
+      <svg class="w-8 h-8 mx-auto mb-3 opacity-40 text-brand-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+      <span class="text-[11px] tracking-widest font-bold opacity-70 uppercase">Image Placeholder</span>
+      <p class="text-[11px] mt-2 opacity-60">お手持ちのペレット製造工場・燃料などの<br>画像を挿入してください</p>
+     </div>
+     <!-- <img src="static/images/your-factory-image.jpg" alt="ペレット製造工場" class="absolute inset-0 w-full h-full object-cover z-20"> -->
+    </div>
+   </div>
+
+  </div>
+ </main>
+
+ <footer class="bg-brand-dark text-white pt-20 md:pt-32 pb-10 border-t border-brand-green/20 relative overflow-hidden">
+  <div class="container mx-auto px-6 max-w-7xl relative z-10 fade-in-up">
+   <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-20">
+    
+    <!-- Brand Info Section -->
+    <div class="md:col-span-5 flex flex-col items-start">
+     <img src="static/images/image_b94ab1.png" alt="川中建築" class="h-10 md:h-12 mb-8 opacity-90 logo-white">
+     <p class="text-[14px] font-normal text-brand-light opacity-70 leading-[2.2] tracking-widest mb-8 font-serif">
+      火を囲み、森と暮らす。<br>環境と調和する豊かな住まいをご提案します。
+     </p>
+     <a href="contact.html" class="flex items-center space-x-4 group magnetic-btn">
+      <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-brand-orange group-hover:border-transparent transition-all duration-300">
+       <svg class="w-4 h-4 text-white group-hover:transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+      </div>
+      <span class="text-[12px] font-medium tracking-[0.2em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">Contact Us</span>
+     </a>
+    </div>
+
+    <div class="md:col-span-1"></div>
+
+    <!-- Navigation -->
+    <div class="md:col-span-3">
+     <h4 class="text-[10px] font-bold text-brand-green tracking-[0.3em] uppercase mb-8 opacity-80">Menu</h4>
+     <ul class="space-y-5 text-[13px] font-medium tracking-[0.15em] text-brand-light opacity-80">
+      <li><a href="index.html" class=" hover:text-brand-orange magnetic-btn hover:opacity-100 transition-colors inline-block relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-brand-orange hover:after:w-full after:transition-all after:duration-300">ホーム</a></li>
+      <li><a href="about-pellet.html" class=" hover:text-brand-orange magnetic-btn hover:opacity-100 transition-colors inline-block relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-brand-orange hover:after:w-full after:transition-all after:duration-300">ペレットとは</a></li>
+      <li><a href="index.html#services" class=" hover:text-brand-orange magnetic-btn hover:opacity-100 transition-colors inline-block relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-brand-orange hover:after:w-full after:transition-all after:duration-300">事業内容</a></li>
+     </ul>
+    </div>
+
+    <!-- Information -->
+    <div class="md:col-span-3">
+     <h4 class="text-[10px] font-bold text-brand-green tracking-[0.3em] uppercase mb-8 opacity-80">Information</h4>
+     <ul class="space-y-4 text-[13px] font-normal text-brand-light opacity-70 leading-loose tracking-widest mb-8">
+      <li>〒669-6123</li>
+      <li>兵庫県豊岡市城崎町来日710-1</li>
+      <li>TEL: <span class="font-serif text-[15px] tracking-normal">0796-32-2264</span></li>
+     </ul>
+     <a href="privacy-policy.html" class="text-[11px] text-brand-light opacity-60 hover:opacity-100 hover:text-brand-orange magnetic-btn transition-colors tracking-widest border-b border-white/20 pb-1">プライバシーポリシー</a>
+    </div>
+   </div>
+
+   <!-- Huge Brand Text -->
+   <div class="w-full border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between items-center">
+    <span class="text-brand-light opacity-30 text-[10px] tracking-[0.2em] font-normal mb-8 md:mb-0">
+     &copy; 2026 KAWANAKA KENCHIKU. ALL RIGHTS RESERVED.
+    </span>
+    <span class="font-serif text-[4vw] md:text-[2vw] text-white/5 tracking-widest pointer-events-none select-none">
+     KAWANAKA KENCHIKU
+    </span>
+   </div>
+  </div>
+ </footer>
+</body>
+</html>

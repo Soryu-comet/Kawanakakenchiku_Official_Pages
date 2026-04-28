@@ -1,0 +1,12 @@
+{
+  "name": "kawanaka-website",
+  "version": "1.0.0",
+  "description": "Tailwind CSS build setup for Kawanaka Architecture",
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./static/css/tailwind-output.css",
+    "watch:css": "tailwindcss -i ./src/input.css -o ./static/css/tailwind-output.css --watch"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.3"
+  }
+}

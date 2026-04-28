@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>ペレットとは？木質ペレット燃料の基礎知識 | 川中建築</title>
+ <meta name="description" content="木質ペレットとは何か？薪との違いやメリット、屋内暖房・アウトドアでの活用法まで、ペレット燃料の基礎知識をわかりやすく解説します。川中建築は兵庫県でペレットの製造からストーブ導入まで一貫対応。">
+
+ <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet">
+ <link rel="stylesheet" href="static/css/style.css">
+ <link rel="stylesheet" href="static/css/tailwind-output.css">
+
+ <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+ <script src="https://unpkg.com/split-type"></script>
+ <script src="static/js/main.js" defer></script>
+ <style>
+  /* About-pellet page specific responsive fixes */
+
+  /* Fix arrow disappearing on hover for link cards */
+  .link-card-arrow {
+    transition: all 0.3s ease;
+  }
+  .link-card:hover .link-card-arrow {
+    transform: translateX(4px);
+  }
+  .link-card:hover .link-card-arrow-circle {
+    background-color: var(--arrow-hover-bg, #2c4c3b);
+    border-color: transparent;
+  }
+  .link-card:hover .link-card-arrow svg {
+    color: white;
+  }
+  .link-card-orange:hover .link-card-arrow-circle {
+    --arrow-hover-bg: #c85a17;
+  }
+
+  /* Responsive section spacing */
+  @media (min-width: 768px) {
+    .about-section-compact {
+      padding-top: 4rem;
+      padding-bottom: 4rem;
+    }
+  }
+  @media (min-width: 1024px) {
+    .about-section-compact {
+      padding-top: 5rem;
+      padding-bottom: 5rem;
+    }
+  }
+
+  /* Responsive improvements for mobile */
+  @media (max-width: 767px) {
+    .about-hero h1 {
+      font-size: 1.875rem;
+      line-height: 1.4;
+    }
+    .about-section-heading h2 {
+      font-size: 1.5rem;
+    }
+    .comparison-table th,
+    .comparison-table td {
+      padding: 0.75rem 0.5rem;
+      font-size: 12px;
+    }
+    .outdoor-grid-icons {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+    }
+    .outdoor-grid-icons > div {
+      padding: 0.75rem;
+    }
+  }
+
+  /* Tablet improvements */
+  @media (min-width: 768px) and (max-width: 1023px) {
+    .comparison-table th,
+    .comparison-table td {
+      padding: 0.75rem 1rem;
+      font-size: 13px;
+    }
+  }
+ </style>
+</head>
+<body class="bg-brand-light text-brand-dark antialiased flex flex-col min-h-screen overflow-x-hidden">
+ <div id="custom-cursor"></div>
+
+ <!-- Page Transition Overlay -->
+ <div id="page-transition" class="fixed inset-0 bg-brand-dark z-[9999] pointer-events-none origin-bottom translate-y-full transition-transform duration-700 ease-in-out flex items-center justify-center">
+  <div class="w-12 h-12 border-4 border-white/20 border-t-brand-orange rounded-full animate-spin transition-opacity duration-300 opacity-0" id="page-transition-spinner"></div>
+ </div>
+ <!-- Ambient Canvas -->
+ <canvas id="ambient-canvas" class="fixed inset-0 pointer-events-none z-[-1] opacity-50"></canvas>
+
+ <header class="fixed w-full z-[100] top-0 transition-all duration-300 py-4 header-glass" id="header">
+  <div class="container mx-auto px-6 max-w-7xl flex justify-between items-center">
+   <a href="index.html" class="z-50 relative magnetic-btn">
+    <img src="static/images/image_b94ab1.png" alt="川中建築" id="header-logo-img" class="h-9 md:h-11 transition-all duration-300">
+   </a>
+   
+   <nav class="hidden md:flex items-center space-x-12 z-50">
+    <a href="index.html" class="font-medium text-brand-dark hover:text-brand-green transition-colors nav-link magnetic-btn tracking-widest text-[13px]">ホーム</a>
+    <a href="about-pellet.html" class="font-medium text-brand-green hover:text-brand-green transition-colors nav-link magnetic-btn tracking-widest text-[13px]">ペレットとは</a>
+    <a href="index.html#services" class="font-medium text-brand-dark hover:text-brand-green transition-colors nav-link magnetic-btn tracking-widest text-[13px]">事業内容</a>
+    <a href="contact.html" class="magnetic-btn ml-6 px-10 py-4 bg-brand-orange text-white font-medium rounded-full hover:bg-[#b04d13] transition-all shadow-md tracking-widest text-[13px]">
+     お問い合わせ
+    </a>
+   </nav>
+
+   <button id="menu-btn" class="md:hidden z-50 focus:outline-none group relative w-10 h-10 flex flex-col justify-center items-center magnetic-btn">
+    <div class="w-7 h-[1px] bg-brand-dark mb-2 transition-all duration-300" id="bar1"></div>
+    <div class="w-7 h-[1px] bg-brand-dark mb-2 transition-all duration-300" id="bar2"></div>
+    <div class="w-7 h-[1px] bg-brand-dark transition-all duration-300" id="bar3"></div>
+   </button>
+  </div>
+ </header>
+
+ <!-- Mobile Menu -->
+ <div id="mobile-menu" class="fixed inset-0 bg-brand-light z-40 hidden flex-col justify-start pt-36 px-10 opacity-0 transition-opacity duration-300 overflow-y-auto">
+  <nav class="w-full">
+   <ul class="space-y-10 pb-16">
+    <li class="group border-b border-gray-200 pb-6">
+     <a href="index.html" class="block magnetic-btn">
+      <span class="block text-xs font-bold text-brand-green tracking-widest mb-2 transition-transform duration-300 group-hover:translate-x-1">HOME</span>
+      <span class="block text-2xl font-serif text-brand-dark transition-colors duration-300 group-hover:text-brand-green">ホーム</span>
+     </a>
+    </li>
+    <li class="group border-b border-gray-200 pb-6">
+     <a href="about-pellet.html" class="block magnetic-btn">
+      <span class="block text-xs font-bold text-brand-green tracking-widest mb-2 transition-transform duration-300 group-hover:translate-x-1">ABOUT PELLET</span>
+      <span class="block text-2xl font-serif text-brand-dark transition-colors duration-300 group-hover:text-brand-green">ペレットとは</span>
+     </a>
+    </li>
+    <li class="group border-b border-gray-200 pb-6">
+     <a href="index.html#services" class="block magnetic-btn">
+      <span class="block text-xs font-bold text-brand-green tracking-widest mb-2 transition-transform duration-300 group-hover:translate-x-1">SERVICES</span>
+      <span class="block text-2xl font-serif text-brand-dark transition-colors duration-300 group-hover:text-brand-green">事業内容</span>
+     </a>
+    </li>
+    <li class="pt-8">
+     <a href="contact.html" class="flex items-center justify-center w-full py-4 bg-brand-orange text-white text-base font-medium rounded-full hover:bg-[#b04d13] transition-all shadow-md tracking-widest magnetic-btn">
+      お問い合わせ
+     </a>
+    </li>
+   </ul>
+  </nav>
+ </div>
+
+ <main class="flex-grow">
+
+  <!-- ① Hero Section -->
+  <section class="relative pt-32 pb-16 md:pt-40 md:pb-20 bg-brand-dark text-white overflow-hidden about-hero">
+   <!-- Background placeholder -->
+   <div class="absolute inset-0 bg-gradient-to-br from-brand-dark via-brand-green/30 to-brand-dark"></div>
+   <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%), radial-gradient(circle at 80% 50%, rgba(44,76,59,0.3) 0%, transparent 50%);"></div>
+
+   <div class="relative z-10 container mx-auto px-6 max-w-5xl fade-in-up">
+    <span class="text-brand-green font-bold tracking-[0.3em] text-[11px] md:text-[13px] uppercase mb-4 md:mb-6 block">About Wood Pellet</span>
+    <h1 class="font-serif text-3xl md:text-5xl lg:text-6xl font-medium mb-6 md:mb-8 tracking-wider leading-[1.3]">
+     木質ペレットという、<br class="md:hidden">新しいエネルギー。
+    </h1>
+    <p class="text-[13px] md:text-[15px] font-normal tracking-[0.15em] leading-[2.2] opacity-80 max-w-2xl">
+     小さな木の粒に秘められた大きな可能性。<br>
+     森の恵みから生まれる、環境にやさしい次世代の燃料をご紹介します。
+    </p>
+   </div>
+  </section>
+
+  <!-- ② ペレットって何？ -->
+  <section class="py-14 md:py-20 lg:py-24 bg-white about-section-compact">
+   <div class="container mx-auto px-6 max-w-5xl">
+
+    <div class="text-center mb-12 md:mb-16 fade-in-up about-section-heading">
+     <span class="text-brand-green font-bold tracking-[0.3em] text-[11px] md:text-[13px] uppercase mb-3 block">What is Pellet?</span>
+     <h2 class="font-serif text-2xl md:text-4xl lg:text-5xl font-medium mb-5 md:mb-6 text-brand-dark tracking-wide">
+      そもそも「ペレット」って<br class="md:hidden">何だろう？
+     </h2>
+     <p class="text-brand-gray text-[13px] md:text-[15px] leading-[2.2] tracking-wider max-w-3xl mx-auto">
+      「ペレット」と聞いて、ぱっと思い浮かぶ方はまだ少ないかもしれません。<br class="hidden md:block">
+      木質ペレットは、実は身近な素材から作られる、とてもシンプルなエネルギーです。
+     </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-14 items-center mb-14 md:mb-16 fade-in-up">
+     <!-- Image Placeholder -->
+     <div class="h-64 md:h-80 lg:h-[380px] w-full bg-gray-100 rounded-2xl overflow-hidden shadow-inner-soft relative border-2 border-gray-300 border-dashed flex flex-col items-center justify-center transition-colors hover:bg-gray-200">
+      <div class="text-brand-gray text-center p-6 z-10">
+       <svg class="w-10 h-10 mx-auto mb-3 opacity-40 text-brand-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+       <span class="text-[11px] tracking-widest font-bold opacity-70 uppercase">Image Placeholder</span>
+       <p class="text-[11px] mt-2 opacity-60">手のひらに乗せたペレットの写真など<br>サイズ感が伝わる画像を挿入</p>
+      </div>
+     </div>
+
+     <!-- Text -->
+     <div>
+      <h3 class="font-serif text-xl md:text-2xl lg:text-3xl font-medium mb-5 md:mb-6 text-brand-dark leading-snug">
+       木のおがくずを、<br>ギュッと圧縮した自然燃料
+      </h3>
+      <p class="text-brand-gray text-[13px] md:text-[14px] leading-[2.2] tracking-wider mb-6">
+       木質ペレットとは、<strong class="text-brand-dark">製材時に出るおがくずや間伐材を乾燥・粉砕して、高圧で圧縮成型した小さな円筒形の固形燃料</strong>です。
+      </p>
+      <div class="bg-brand-light rounded-2xl p-6 md:p-7 border border-gray-100">
+       <ul class="space-y-4 text-[13px] md:text-[14px] tracking-wider">
+        <li class="flex items-start">
+         <span class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center shrink-0 mr-3 md:mr-4 mt-0.5 text-xs md:text-sm font-bold">径</span>
+         <div>
+          <span class="font-medium text-brand-dark block mb-0.5">直径 6〜8mm</span>
+          <span class="text-brand-gray text-[12px] md:text-[13px]">鉛筆ほどの太さです</span>
+         </div>
+        </li>
+        <li class="flex items-start">
+         <span class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center shrink-0 mr-3 md:mr-4 mt-0.5 text-xs md:text-sm font-bold">長</span>
+         <div>
+          <span class="font-medium text-brand-dark block mb-0.5">長さ 10〜30mm</span>
+          <span class="text-brand-gray text-[12px] md:text-[13px]">指の第一関節くらいの長さ</span>
+         </div>
+        </li>
+        <li class="flex items-start">
+         <span class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-brand-green/10 text-brand-green flex items-center justify-center shrink-0 mr-3 md:mr-4 mt-0.5 text-xs md:text-sm font-bold">原</span>
+         <div>
+          <span class="font-medium text-brand-dark block mb-0.5">原料は 100% 天然の木</span>
+          <span class="text-brand-gray text-[12px] md:text-[13px]">接着剤や化学物質は一切不使用</span>
+         </div>
+        </li>
+       </ul>
+      </div>
+     </div>
+    </div>
+
+    <!-- How pellets are made -->
+    <div class="fade-in-up">
+     <div class="text-center mb-8 md:mb-10">
+      <h3 class="font-serif text-xl md:text-2xl lg:text-3xl font-medium text-brand-dark tracking-wide">ペレットができるまで</h3>
+     </div>
+     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5">
+      <div class="bg-brand-light rounded-2xl p-5 md:p-6 text-center border border-gray-100 hover:border-brand-green/20 transition-colors">
+       <div class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-3 rounded-full bg-brand-green/10 flex items-center justify-center">
+        <svg class="w-5 h-5 md:w-6 md:h-6 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"></path></svg>
+       </div>
+       <span class="text-brand-green text-[10px] font-bold tracking-widest uppercase block mb-1.5">Step 01</span>
+       <h4 class="font-serif text-base md:text-lg font-medium text-brand-dark mb-2">間伐・製材</h4>
+       <p class="text-brand-gray text-[12px] md:text-[13px] leading-[1.8] tracking-wider">山林の間伐材や、製材所で出たおがくず・端材を集めます</p>
+      </div>
+      <div class="bg-brand-light rounded-2xl p-5 md:p-6 text-center border border-gray-100 hover:border-brand-green/20 transition-colors">
+       <div class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-3 rounded-full bg-brand-green/10 flex items-center justify-center">
+        <svg class="w-5 h-5 md:w-6 md:h-6 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+       </div>
+       <span class="text-brand-green text-[10px] font-bold tracking-widest uppercase block mb-1.5">Step 02</span>
+       <h4 class="font-serif text-base md:text-lg font-medium text-brand-dark mb-2">乾燥・粉砕</h4>
+       <p class="text-brand-gray text-[12px] md:text-[13px] leading-[1.8] tracking-wider">含水率を10%以下まで乾燥させ、均一な粒子に粉砕します</p>
+      </div>
+      <div class="bg-brand-light rounded-2xl p-5 md:p-6 text-center border border-gray-100 hover:border-brand-green/20 transition-colors">
+       <div class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-3 rounded-full bg-brand-green/10 flex items-center justify-center">
+        <svg class="w-5 h-5 md:w-6 md:h-6 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+       </div>
+       <span class="text-brand-green text-[10px] font-bold tracking-widest uppercase block mb-1.5">Step 03</span>
+       <h4 class="font-serif text-base md:text-lg font-medium text-brand-dark mb-2">圧縮成型</h4>
+       <p class="text-brand-gray text-[12px] md:text-[13px] leading-[1.8] tracking-wider">高温高圧で、木自身のリグニンを糊にして固めます（添加物なし）</p>
+      </div>
+      <div class="bg-brand-light rounded-2xl p-5 md:p-6 text-center border border-gray-100 hover:border-brand-green/20 transition-colors">
+       <div class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-3 rounded-full bg-brand-green/10 flex items-center justify-center">
+        <svg class="w-5 h-5 md:w-6 md:h-6 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.879 16.121A3 3 0 1012.015 11L11 14H9c0 .768.293 1.536.879 2.121z"></path></svg>
+       </div>
+       <span class="text-brand-green text-[10px] font-bold tracking-widest uppercase block mb-1.5">Step 04</span>
+       <h4 class="font-serif text-base md:text-lg font-medium text-brand-dark mb-2">完成</h4>
+       <p class="text-brand-gray text-[12px] md:text-[13px] leading-[1.8] tracking-wider">均一なサイズの木質ペレットが完成。安定した燃焼が可能に</p>
+      </div>
+     </div>
+    </div>
+
+   </div>
+  </section>
+
+  <!-- ③ なぜペレット？（薪との比較） -->
+  <section class="py-14 md:py-20 lg:py-24 bg-[#f5f4ef] about-section-compact">
+   <div class="container mx-auto px-6 max-w-5xl">
+
+    <div class="text-center mb-10 md:mb-14 fade-in-up about-section-heading">
+     <span class="text-brand-green font-bold tracking-[0.3em] text-[11px] md:text-[13px] uppercase mb-3 block">Pellet vs Firewood</span>
+     <h2 class="font-serif text-2xl md:text-4xl lg:text-5xl font-medium mb-5 md:mb-6 text-brand-dark tracking-wide">
+      薪とどう違うの？
+     </h2>
+     <p class="text-brand-gray text-[13px] md:text-[14px] leading-[2] tracking-wider max-w-3xl mx-auto">
+      見た目は木の棒のようですが、ペレットと薪は全くの別物。<br class="hidden md:block">
+      手軽さ・効率・環境性能で大きな差があります。
+     </p>
+    </div>
+
+    <!-- Comparison Table -->
+    <div class="bg-white rounded-3xl shadow-soft overflow-hidden mb-10 md:mb-14 fade-in-up">
+     <div class="overflow-x-auto">
+      <table class="w-full text-[13px] md:text-[14px] tracking-wider comparison-table">
+       <thead>
+        <tr class="bg-brand-dark text-white">
+         <th class="py-4 px-4 md:px-6 text-left font-medium tracking-widest text-[11px] md:text-[12px] uppercase w-1/4 md:w-1/3">比較項目</th>
+         <th class="py-4 px-4 md:px-6 text-left font-medium tracking-widest text-[11px] md:text-[12px]">
+          <span class="inline-flex items-center gap-2">
+           <span class="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-brand-green"></span>木質ペレット
+          </span>
+         </th>
+         <th class="py-4 px-4 md:px-6 text-left font-medium tracking-widest text-[11px] md:text-[12px]">
+          <span class="inline-flex items-center gap-2">
+           <span class="w-2 h-2 md:w-2.5 md:h-2.5 rounded-full bg-brand-gray/50"></span>薪
+          </span>
+         </th>
+        </tr>
+       </thead>
+       <tbody class="divide-y divide-gray-100">
+        <tr class="hover:bg-brand-light/50 transition-colors">
+         <td class="py-3.5 px-4 md:py-4 md:px-6 font-medium text-brand-dark">着火</td>
+         <td class="py-3.5 px-4 md:py-4 md:px-6 text-brand-gray">ボタンひとつで自動着火</td>
+         <td class="py-3.5 px-4 md:py-4 md:px-6 text-brand-gray">着火材・技術が必要</td>
+        </tr>
+        <tr class="hover:bg-brand-light/50 transition-colors">
+         <td class="py-3.5 px-4 md:py-4 md:px-6 font-medium text-brand-dark">煙</td>
+         <td class="py-3.5 px-4 md:py-4 md:px-6 text-brand-gray">ほぼ無煙（住宅地OK）</td>
+         <td class="py-3.5 px-4 md:py-4 md:px-6 text-brand-gray">煙が出やすい</td>
+        </tr>
+        <tr class="hover:bg-brand-light/50 transition-colors">
+         <td class="py-3.5 px-4 md:py-4 md:px-6 font-medium text-brand-dark">灰の量</td>
+         <td class="py-3.5 px-4 md:py-4 md:px-6 text-brand-gray">非常に少ない（約1%）</td>
+         <td class="py-3.5 px-4 md:py-4 md:px-6 text-brand-gray">多め（頻繁な掃除が必要）</td>
+        </tr>
+        <tr class="hover:bg-brand-light/50 transition-colors">
+         <td class="py-3.5 px-4 md:py-4 md:px-6 font-medium text-brand-dark">保管</td>
+         <td class="py-3.5 px-4 md:py-4 md:px-6 text-brand-gray">袋入りでコンパクト</td>
+         <td class="py-3.5 px-4 md:py-4 md:px-6 text-brand-gray">広いスペースが必要</td>
+        </tr>
+        <tr class="hover:bg-brand-light/50 transition-colors">
+         <td class="py-3.5 px-4 md:py-4 md:px-6 font-medium text-brand-dark">温度調整</td>
+         <td class="py-3.5 px-4 md:py-4 md:px-6 text-brand-gray">自動制御（タイマー付き）</td>
+         <td class="py-3.5 px-4 md:py-4 md:px-6 text-brand-gray">手動で調整（経験が必要）</td>
+        </tr>
+        <tr class="hover:bg-brand-light/50 transition-colors">
+         <td class="py-3.5 px-4 md:py-4 md:px-6 font-medium text-brand-dark">燃焼効率</td>
+         <td class="py-3.5 px-4 md:py-4 md:px-6 text-brand-gray">80〜90%以上</td>
+         <td class="py-3.5 px-4 md:py-4 md:px-6 text-brand-gray">50〜80%程度</td>
+        </tr>
+        <tr class="hover:bg-brand-light/50 transition-colors">
+         <td class="py-3.5 px-4 md:py-4 md:px-6 font-medium text-brand-dark">CO₂排出</td>
+         <td class="py-3.5 px-4 md:py-4 md:px-6 text-brand-gray">カーボンニュートラル</td>
+         <td class="py-3.5 px-4 md:py-4 md:px-6 text-brand-gray">カーボンニュートラル</td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+    </div>
+
+    <!-- Key Environmental Message -->
+    <div class="bg-brand-green text-white rounded-3xl p-8 md:p-10 relative overflow-hidden fade-in-up">
+     <div class="absolute -right-20 -top-20 w-64 h-64 bg-white opacity-5 rounded-full blur-3xl"></div>
+     <div class="absolute -left-10 -bottom-10 w-48 h-48 bg-white opacity-5 rounded-full blur-3xl"></div>
+     <div class="relative z-10 flex flex-col md:flex-row items-center gap-6 md:gap-8">
+      <div class="w-20 h-20 md:w-24 md:h-24 rounded-full bg-white/10 flex items-center justify-center shrink-0 border border-white/20">
+       <svg class="w-10 h-10 md:w-12 md:h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+      </div>
+      <div>
+       <h3 class="font-serif text-xl md:text-2xl lg:text-3xl font-medium mb-3 md:mb-4 leading-snug">
+        カーボンニュートラルとは？
+       </h3>
+       <p class="text-white/85 text-[13px] md:text-[14px] leading-[2.2] tracking-wider">
+        木は成長中にCO₂を吸収しているため、燃やして出るCO₂と差し引きゼロ。<br class="hidden lg:block">
+        化石燃料（石油・ガス）のように「新たなCO₂」を排出しないため、<br class="hidden lg:block">
+        地球温暖化の原因にならないクリーンなエネルギーとして注目されています。
+       </p>
+      </div>
+     </div>
+    </div>
+
+   </div>
+  </section>
+
+  <!-- ④ 用途紹介：屋内暖房 -->
+  <section class="py-14 md:py-20 lg:py-24 bg-white about-section-compact">
+   <div class="container mx-auto px-6 max-w-5xl">
+
+    <div class="text-center mb-10 md:mb-14 fade-in-up about-section-heading">
+     <span class="text-brand-green font-bold tracking-[0.3em] text-[11px] md:text-[13px] uppercase mb-3 block">Indoor Heating</span>
+     <h2 class="font-serif text-2xl md:text-4xl lg:text-5xl font-medium mb-5 md:mb-6 text-brand-dark tracking-wide">
+      お部屋をやさしく暖める
+     </h2>
+     <p class="text-brand-gray text-[13px] md:text-[14px] leading-[2] tracking-wider max-w-3xl mx-auto">
+      ペレットストーブは、現代の住まいにぴったりな次世代の暖房器具です。<br class="hidden md:block">
+      火のゆらめきを楽しみながら、便利で快適な暖房をお届けします。
+     </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-14 items-center mb-10 md:mb-12 fade-in-up">
+     <!-- Text -->
+     <div class="order-2 md:order-1">
+      <h3 class="font-serif text-xl md:text-2xl lg:text-3xl font-medium mb-5 md:mb-6 text-brand-dark leading-snug">
+       ボタンひとつで、<br>暖かな炎のある暮らし
+      </h3>
+      <p class="text-brand-gray text-[13px] md:text-[14px] leading-[2.2] tracking-wider mb-6 md:mb-8">
+       スイッチを押すだけで自動着火し、設定温度をキープ。タイマー機能付きなら、帰宅前にお部屋を暖めておくことも可能です。エアコンとは異なる輻射熱で、空気を乾燥させにくく、体の芯から温まります。
+      </p>
+      <ul class="space-y-3 text-[13px] md:text-[14px] tracking-wider">
+       <li class="flex items-center">
+        <span class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mr-3">
+         <svg class="w-3 h-3 md:w-3.5 md:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+        </span>
+        <span class="text-brand-dark font-medium">自動着火・温度調整・タイマー制御</span>
+       </li>
+       <li class="flex items-center">
+        <span class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mr-3">
+         <svg class="w-3 h-3 md:w-3.5 md:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+        </span>
+        <span class="text-brand-dark font-medium">煙が少なく住宅地でも安心</span>
+       </li>
+       <li class="flex items-center">
+        <span class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mr-3">
+         <svg class="w-3 h-3 md:w-3.5 md:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+        </span>
+        <span class="text-brand-dark font-medium">輻射熱で体の芯からぽかぽか</span>
+       </li>
+       <li class="flex items-center">
+        <span class="w-5 h-5 md:w-6 md:h-6 rounded-full bg-brand-orange/10 text-brand-orange flex items-center justify-center shrink-0 mr-3">
+         <svg class="w-3 h-3 md:w-3.5 md:h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
+        </span>
+        <span class="text-brand-dark font-medium">炎のゆらぎによるリラックス効果</span>
+       </li>
+      </ul>
+     </div>
+
+     <!-- Image Placeholder -->
+     <div class="order-1 md:order-2 h-64 md:h-80 lg:h-[400px] w-full bg-gray-100 rounded-2xl overflow-hidden shadow-inner-soft relative border-2 border-gray-300 border-dashed flex flex-col items-center justify-center transition-colors hover:bg-gray-200">
+      <div class="text-brand-gray text-center p-6 z-10">
+       <svg class="w-10 h-10 mx-auto mb-3 opacity-40 text-brand-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+       <span class="text-[11px] tracking-widest font-bold opacity-70 uppercase">Image Placeholder</span>
+       <p class="text-[11px] mt-2 opacity-60">リビングに設置された<br>ペレットストーブの写真</p>
+      </div>
+     </div>
+    </div>
+
+    <div class="fade-in-up">
+     <a href="service-pellet.html" class="link-card group flex items-center justify-between w-full bg-brand-light border border-gray-200 hover:border-brand-green/30 rounded-2xl p-6 md:p-7 transition-all hover:shadow-soft">
+      <div>
+       <span class="text-brand-green text-[11px] font-bold tracking-widest uppercase block mb-1.5">Pellet Stoves</span>
+       <span class="font-serif text-lg md:text-xl lg:text-2xl font-medium text-brand-dark">ペレットストーブの導入について詳しく見る</span>
+      </div>
+      <div class="link-card-arrow w-10 h-10 md:w-12 md:h-12 rounded-full border border-brand-green/30 flex items-center justify-center shrink-0 ml-4 link-card-arrow-circle transition-all duration-300">
+       <svg class="w-4 h-4 md:w-5 md:h-5 text-brand-green transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+      </div>
+     </a>
+    </div>
+
+   </div>
+  </section>
+
+  <!-- ⑤ 用途紹介：アウトドア -->
+  <section class="py-14 md:py-20 lg:py-24 bg-[#f5f4ef] about-section-compact">
+   <div class="container mx-auto px-6 max-w-5xl">
+
+    <div class="text-center mb-10 md:mb-14 fade-in-up about-section-heading">
+     <span class="text-brand-orange font-bold tracking-[0.3em] text-[11px] md:text-[13px] uppercase mb-3 block">Outdoor & Emergency</span>
+     <h2 class="font-serif text-2xl md:text-4xl lg:text-5xl font-medium mb-5 md:mb-6 text-brand-dark tracking-wide">
+      アウトドアにも、<br class="md:hidden">防災にも。
+     </h2>
+     <p class="text-brand-gray text-[13px] md:text-[14px] leading-[2] tracking-wider max-w-3xl mx-auto">
+      ペレットの魅力は屋内暖房だけにとどまりません。<br class="hidden md:block">
+      電源不要のポータブルコンロで、キャンプ・BBQ・庭先料理から、いざという時の防災グッズとしても活躍します。
+     </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-14 items-center mb-10 md:mb-12 fade-in-up">
+     <!-- Image Placeholder -->
+     <div class="h-64 md:h-80 lg:h-[400px] w-full bg-gray-100 rounded-2xl overflow-hidden shadow-inner-soft relative border-2 border-gray-300 border-dashed flex flex-col items-center justify-center transition-colors hover:bg-gray-200">
+      <div class="text-brand-gray text-center p-6 z-10">
+       <svg class="w-10 h-10 mx-auto mb-3 opacity-40 text-brand-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+       <span class="text-[11px] tracking-widest font-bold opacity-70 uppercase">Image Placeholder</span>
+       <p class="text-[11px] mt-2 opacity-60">アウトドアでペレ炉やソロ炉を<br>使用している写真</p>
+      </div>
+     </div>
+
+     <!-- Text -->
+     <div>
+      <h3 class="font-serif text-xl md:text-2xl lg:text-3xl font-medium mb-5 md:mb-6 text-brand-dark leading-snug">
+       持ち運べる「炎」で、<br>非日常を味わう
+      </h3>
+      <p class="text-brand-gray text-[13px] md:text-[14px] leading-[2.2] tracking-wider mb-6 md:mb-8">
+       国産ストーブメーカー・シモタニ社との共同開発で生まれた、完全無電源のポータブルペレットコンロ<strong class="text-brand-dark">『ペレ炉®』『ソロ炉』</strong>。<br><br>
+       薪のように「はぜる」ことが少なく安定した火力で、キャンプやテラスでの料理から、災害時のライフラインまで幅広く活躍します。
+      </p>
+      <div class="grid grid-cols-2 gap-3 md:gap-4 outdoor-grid-icons">
+       <div class="bg-white rounded-xl p-4 md:p-5 border border-gray-100 text-center">
+        <div class="w-8 h-8 md:w-10 md:h-10 mx-auto mb-2 md:mb-3 rounded-full bg-brand-orange/10 flex items-center justify-center">
+         <svg class="w-4 h-4 md:w-5 md:h-5 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"></path></svg>
+        </div>
+        <span class="text-brand-dark text-[12px] md:text-[13px] font-medium block">キャンプ</span>
+       </div>
+       <div class="bg-white rounded-xl p-4 md:p-5 border border-gray-100 text-center">
+        <div class="w-8 h-8 md:w-10 md:h-10 mx-auto mb-2 md:mb-3 rounded-full bg-brand-orange/10 flex items-center justify-center">
+         <svg class="w-4 h-4 md:w-5 md:h-5 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+        </div>
+        <span class="text-brand-dark text-[12px] md:text-[13px] font-medium block">庭先・テラス</span>
+       </div>
+       <div class="bg-white rounded-xl p-4 md:p-5 border border-gray-100 text-center">
+        <div class="w-8 h-8 md:w-10 md:h-10 mx-auto mb-2 md:mb-3 rounded-full bg-brand-orange/10 flex items-center justify-center">
+         <svg class="w-4 h-4 md:w-5 md:h-5 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"></path></svg>
+        </div>
+        <span class="text-brand-dark text-[12px] md:text-[13px] font-medium block">BBQ・料理</span>
+       </div>
+       <div class="bg-white rounded-xl p-4 md:p-5 border border-gray-100 text-center">
+        <div class="w-8 h-8 md:w-10 md:h-10 mx-auto mb-2 md:mb-3 rounded-full bg-brand-orange/10 flex items-center justify-center">
+         <svg class="w-4 h-4 md:w-5 md:h-5 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+        </div>
+        <span class="text-brand-dark text-[12px] md:text-[13px] font-medium block">防災用品</span>
+       </div>
+      </div>
+     </div>
+    </div>
+
+    <div class="fade-in-up">
+     <a href="service-product.html" class="link-card link-card-orange group flex items-center justify-between w-full bg-white border border-gray-200 hover:border-brand-orange/30 rounded-2xl p-6 md:p-7 transition-all hover:shadow-soft">
+      <div>
+       <span class="text-brand-orange text-[11px] font-bold tracking-widest uppercase block mb-1.5">Original Gears</span>
+       <span class="font-serif text-lg md:text-xl lg:text-2xl font-medium text-brand-dark">ペレ炉®・ソロ炉など製品情報を見る</span>
+      </div>
+      <div class="link-card-arrow w-10 h-10 md:w-12 md:h-12 rounded-full border border-brand-orange/30 flex items-center justify-center shrink-0 ml-4 link-card-arrow-circle transition-all duration-300">
+       <svg class="w-4 h-4 md:w-5 md:h-5 text-brand-orange transition-colors duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+      </div>
+     </a>
+    </div>
+
+   </div>
+  </section>
+
+  <!-- ⑥ 川中建築のペレット -->
+  <section class="py-14 md:py-20 lg:py-24 bg-white about-section-compact">
+   <div class="container mx-auto px-6 max-w-5xl">
+
+    <div class="text-center mb-10 md:mb-14 fade-in-up about-section-heading">
+     <span class="text-brand-green font-bold tracking-[0.3em] text-[11px] md:text-[13px] uppercase mb-3 block">Our Commitment</span>
+     <h2 class="font-serif text-2xl md:text-4xl lg:text-5xl font-medium mb-5 md:mb-6 text-brand-dark tracking-wide">
+      川中建築だからできること
+     </h2>
+     <p class="text-brand-gray text-[13px] md:text-[14px] leading-[2] tracking-wider max-w-3xl mx-auto">
+      燃料の製造からストーブの施工・メンテナンスまで、すべてを一貫して対応しています。
+     </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 fade-in-up">
+     <div class="bg-brand-light rounded-2xl p-7 md:p-8 border border-gray-100 text-center hover:shadow-soft transition-all duration-300">
+      <div class="w-12 h-12 md:w-14 md:h-14 mx-auto mb-4 md:mb-5 rounded-full bg-brand-green/10 flex items-center justify-center">
+       <svg class="w-6 h-6 md:w-7 md:h-7 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path></svg>
+      </div>
+      <h4 class="font-serif text-base md:text-lg font-medium text-brand-dark mb-2 md:mb-3">自社工場で燃料製造</h4>
+      <p class="text-brand-gray text-[12px] md:text-[13px] leading-[2] tracking-wider">
+       地域の間伐材・端材を使い、自社工場で良質な木質ペレットを日々製造。エネルギーの完全な「地産地消」を実現しています。
+      </p>
+     </div>
+     <div class="bg-brand-light rounded-2xl p-7 md:p-8 border border-gray-100 text-center hover:shadow-soft transition-all duration-300">
+      <div class="w-12 h-12 md:w-14 md:h-14 mx-auto mb-4 md:mb-5 rounded-full bg-brand-green/10 flex items-center justify-center">
+       <svg class="w-6 h-6 md:w-7 md:h-7 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+      </div>
+      <h4 class="font-serif text-base md:text-lg font-medium text-brand-dark mb-2 md:mb-3">施工からメンテナンスまで</h4>
+      <p class="text-brand-gray text-[12px] md:text-[13px] leading-[2] tracking-wider">
+       ストーブの選定・設置工事・アフターメンテナンスまで、ワンストップで対応。建築会社ならではの確かな技術力が強みです。
+      </p>
+     </div>
+     <div class="bg-brand-light rounded-2xl p-7 md:p-8 border border-gray-100 text-center hover:shadow-soft transition-all duration-300">
+      <div class="w-12 h-12 md:w-14 md:h-14 mx-auto mb-4 md:mb-5 rounded-full bg-brand-green/10 flex items-center justify-center">
+       <svg class="w-6 h-6 md:w-7 md:h-7 text-brand-green" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+      </div>
+      <h4 class="font-serif text-base md:text-lg font-medium text-brand-dark mb-2 md:mb-3">独自製品の開発力</h4>
+      <p class="text-brand-gray text-[12px] md:text-[13px] leading-[2] tracking-wider">
+       シモタニ社と共同開発の無電源ポータブルコンロ『ペレ炉®』『ソロ炉』など、本当に使える製品を自らの手で生み出しています。
+      </p>
+     </div>
+    </div>
+
+   </div>
+  </section>
+
+  <!-- ⑦ CTA -->
+  <section class="py-16 md:py-20 lg:py-24 bg-brand-dark text-white relative overflow-hidden">
+   <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 30% 50%, rgba(44,76,59,0.4) 0%, transparent 50%), radial-gradient(circle at 70% 50%, rgba(200,90,23,0.3) 0%, transparent 50%);"></div>
+   <div class="container mx-auto px-6 max-w-4xl relative z-10 text-center fade-in-up">
+    <h2 class="font-serif text-2xl md:text-4xl lg:text-5xl font-medium mb-5 md:mb-6 tracking-wide leading-tight">
+     ペレットのある暮らし、<br class="md:hidden">はじめませんか？
+    </h2>
+    <p class="text-white/70 text-[13px] md:text-[14px] leading-[2.2] tracking-wider mb-8 md:mb-10 max-w-2xl mx-auto">
+     「うちにも導入できるの？」「燃料費はどのくらい？」<br class="hidden md:block">
+     まずはお気軽にご相談ください。ペレットのプロが丁寧にお答えします。
+    </p>
+    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+     <a href="contact.html" class="magnetic-btn inline-flex items-center justify-center px-10 md:px-14 py-4 md:py-5 bg-brand-orange text-white font-medium rounded-full hover:bg-[#b04d13] transition-all shadow-md hover:shadow-hover-soft tracking-[0.2em] text-[12px] md:text-[13px]">
+      お問い合わせ・相談する
+     </a>
+     <a href="service-pellet.html" class="magnetic-btn inline-flex items-center justify-center px-10 md:px-14 py-4 md:py-5 border border-white/30 text-white font-medium rounded-full hover:bg-white/10 transition-all tracking-[0.2em] text-[12px] md:text-[13px]">
+      ストーブ導入を検討する
+     </a>
+    </div>
+   </div>
+  </section>
+
+ </main>
+
+ <footer class="bg-brand-dark text-white pt-14 md:pt-20 pb-8 md:pb-10 border-t border-brand-green/20 relative overflow-hidden">
+  <div class="container mx-auto px-6 max-w-7xl relative z-10 fade-in-up">
+   <div class="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-8 mb-14 md:mb-16">
+    
+    <!-- Brand Info Section -->
+    <div class="md:col-span-5 flex flex-col items-start">
+     <img src="static/images/image_b94ab1.png" alt="川中建築" class="h-9 md:h-12 mb-6 md:mb-8 opacity-90 logo-white">
+     <p class="text-[13px] md:text-[14px] font-normal text-brand-light opacity-70 leading-[2.2] tracking-widest mb-6 md:mb-8 font-serif">
+      火を囲み、森と暮らす。<br>環境と調和する豊かな住まいをご提案します。
+     </p>
+     <a href="contact.html" class="flex items-center space-x-4 group magnetic-btn">
+      <div class="w-10 h-10 md:w-12 md:h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-brand-orange group-hover:border-transparent transition-all duration-300">
+       <svg class="w-3.5 h-3.5 md:w-4 md:h-4 text-white group-hover:transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+      </div>
+      <span class="text-[11px] md:text-[12px] font-medium tracking-[0.2em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">Contact Us</span>
+     </a>
+    </div>
+
+    <div class="md:col-span-1"></div>
+
+    <!-- Navigation -->
+    <div class="md:col-span-3">
+     <h4 class="text-[10px] font-bold text-brand-green tracking-[0.3em] uppercase mb-5 md:mb-8 opacity-80">Menu</h4>
+     <ul class="space-y-4 md:space-y-5 text-[13px] font-medium tracking-[0.15em] text-brand-light opacity-80">
+      <li><a href="index.html" class=" hover:text-brand-orange magnetic-btn hover:opacity-100 transition-colors inline-block relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-brand-orange hover:after:w-full after:transition-all after:duration-300">ホーム</a></li>
+      <li><a href="about-pellet.html" class=" hover:text-brand-orange magnetic-btn hover:opacity-100 transition-colors inline-block relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-brand-orange hover:after:w-full after:transition-all after:duration-300">ペレットとは</a></li>
+      <li><a href="index.html#services" class=" hover:text-brand-orange magnetic-btn hover:opacity-100 transition-colors inline-block relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-brand-orange hover:after:w-full after:transition-all after:duration-300">事業内容</a></li>
+     </ul>
+    </div>
+
+    <!-- Information -->
+    <div class="md:col-span-3">
+     <h4 class="text-[10px] font-bold text-brand-green tracking-[0.3em] uppercase mb-5 md:mb-8 opacity-80">Information</h4>
+     <ul class="space-y-3 md:space-y-4 text-[13px] font-normal text-brand-light opacity-70 leading-loose tracking-widest mb-6 md:mb-8">
+      <li>〒669-6123</li>
+      <li>兵庫県豊岡市城崎町来日710-1</li>
+      <li>TEL: <span class="font-serif text-[14px] md:text-[15px] tracking-normal">0796-32-2264</span></li>
+     </ul>
+     <a href="privacy-policy.html" class="text-[11px] text-brand-light opacity-60 hover:opacity-100 hover:text-brand-orange magnetic-btn transition-colors tracking-widest border-b border-white/20 pb-1">プライバシーポリシー</a>
+    </div>
+   </div>
+
+   <!-- Huge Brand Text -->
+   <div class="w-full border-t border-white/10 pt-8 md:pt-10 flex flex-col md:flex-row justify-between items-center">
+    <span class="text-brand-light opacity-30 text-[10px] tracking-[0.2em] font-normal mb-6 md:mb-0">
+     &copy; 2026 KAWANAKA KENCHIKU. ALL RIGHTS RESERVED.
+    </span>
+    <span class="font-serif text-[4vw] md:text-[2vw] text-white/5 tracking-widest pointer-events-none select-none">
+     KAWANAKA KENCHIKU
+    </span>
+   </div>
+  </div>
+ </footer>
+</body>
+</html>

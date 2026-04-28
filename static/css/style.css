@@ -1,0 +1,174 @@
+/* Core & Utilities */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Header Glassmorphism */
+.header-glass {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+/* 3D Tilt Cards (Vanilla JS) */
+.card-hover {
+    transition: box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
+}
+.card-hover:hover {
+    box-shadow: 0 30px 60px -15px rgba(0,0,0,0.15);
+    /* translateY scale3d etc handled by JS */
+}
+.card-hover-img-wrapper {
+    overflow: hidden;
+}
+.card-hover-img {
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.card-hover:hover .card-hover-img {
+    transform: scale(1.05);
+}
+
+/* Logo filtering */
+.logo-white {
+    filter: brightness(0) invert(1);
+}
+
+/* Scroll indicator */
+.scrolldown {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    opacity: 0.9;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+.scrolldown::before {
+    content: '';
+    width: 1px;
+    height: 60px;
+    background: white;
+    margin-bottom: 12px;
+    transform: scaleY(0);
+    transform-origin: top;
+    animation: scrolldown_anim 2.5s infinite cubic-bezier(0.645, 0.045, 0.355, 1);
+}
+@keyframes scrolldown_anim {
+    0% { transform: scaleY(0); }
+    50% { transform: scaleY(1); }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* Floating Label for Forms */
+.floating-input {
+    position: relative;
+    padding-top: 1.5rem;
+    padding-bottom: 0.5rem;
+}
+.floating-label {
+    position: absolute;
+    left: 1.25rem;
+    top: 50%;
+    transform: translateY(-50%);
+    transition: all 0.2s ease-out;
+    pointer-events: none;
+    font-size: 0.875rem;
+    color: #9ca3af;
+}
+.floating-input:focus ~ .floating-label,
+.floating-input:not(:placeholder-shown) ~ .floating-label,
+.floating-input:valid ~ .floating-label {
+    top: 0.8rem;
+    font-size: 0.65rem;
+    color: #2c4c3b;
+    font-weight: bold;
+}
+
+textarea.floating-input ~ .floating-label {
+    top: 1.5rem;
+}
+textarea.floating-input:focus ~ .floating-label,
+textarea.floating-input:not(:placeholder-shown) ~ .floating-label,
+textarea.floating-input:valid ~ .floating-label {
+    top: 0.8rem;
+}
+
+/* Custom Select */
+select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1.25rem center;
+    background-size: 1.2em;
+}
+
+/* Magnetic Button Wrapper */
+.magnetic-btn {
+    display: inline-block;
+    position: relative;
+    /* GSAP takes over transform; prevent CSS transitions from conflicting and causing 'lag/stickiness' */
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, filter, backdrop-filter !important;
+}
+
+/* Setup for initial hidden state of GSAP animated elements */
+.fade-in-up {
+    opacity: 0;
+    visibility: hidden;
+}
+
+/* Fancy Form Submit Button */
+.submit-btn {
+    position: relative;
+    overflow: hidden;
+}
+.submit-btn.loading {
+    color: transparent !important;
+    pointer-events: none;
+}
+.submit-btn::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border: 2px solid white;
+    border-top-color: transparent;
+    border-radius: 50%;
+    opacity: 0;
+    animation: spinner .8s linear infinite;
+    transition: opacity 0.3s;
+}
+.submit-btn.loading::after {
+    opacity: 1;
+}
+@keyframes spinner {
+    to { transform: rotate(360deg); }
+}
