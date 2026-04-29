@@ -146,6 +146,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (menuBtn) {
         menuBtn.addEventListener('click', () => {
             isMenuOpen = !isMenuOpen;
+            
+            // アクセシビリティ属性の更新
+            menuBtn.setAttribute('aria-expanded', isMenuOpen);
+            menuBtn.setAttribute('aria-label', isMenuOpen ? 'メニューを閉じる' : 'メニューを開く');
+
             if (isMenuOpen) {
                 mobileMenu.classList.remove('hidden');
                 setTimeout(() => mobileMenu.classList.remove('opacity-0'), 10);
