@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Tailwind CSS build setup for Kawanaka Architecture",
   "scripts": {
+    "build": "npm run build:css",
+    "dev": "npm run watch:css",
     "build:css": "tailwindcss -i ./src/input.css -o ./public/static/css/tailwind-output.css",
     "watch:css": "tailwindcss -i ./src/input.css -o ./public/static/css/tailwind-output.css --watch"
   },

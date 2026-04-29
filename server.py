@@ -4,7 +4,7 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.utils import formataddr
 import requests
-from flask import Flask, request, jsonify, send_from_directory, render_template
+from flask import Flask, request, jsonify, send_from_directory, render_template, redirect
 from waitress import serve
 from dotenv import load_dotenv
 
@@ -29,15 +29,28 @@ SUBJECT_MAP = {
 def index():
     return render_template('index.html')
 
-@app.route('/contact.html')
+@app.route('/contact')
 def contact_page():
     site_key = os.environ.get("TURNSTILE_SITE_KEY", "1x00000000000000000000AA")
     return render_template('contact.html', TURNSTILE_SITE_KEY=site_key)
 
 @app.route('/<path:filename>')
 def serve_file(filename):
-    if os.path.exists(os.path.join(PUBLIC_DIR, filename)):
+    # .html付きでアクセスされた場合は拡張子なしへリダイレクト
+    if filename.endswith('.html'):
+        return redirect(f"/{filename[:-5]}", code=301)
+        
+    # そのままのファイルが存在するかチェック
+    exact_path = os.path.join(PUBLIC_DIR, filename)
+    if os.path.exists(exact_path) and os.path.isfile(exact_path):
         return send_from_directory(PUBLIC_DIR, filename)
+        
+    # .htmlを付けたファイルが存在するかチェック
+    html_filename = filename + '.html'
+    html_path = os.path.join(PUBLIC_DIR, html_filename)
+    if os.path.exists(html_path) and os.path.isfile(html_path):
+        return send_from_directory(PUBLIC_DIR, html_filename)
+        
     return "Not Found", 404
 
 # /api/contact エンドポイント
