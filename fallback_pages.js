@@ -23,14 +23,12 @@ function returnMaintenancePage() {
   <meta name="theme-color" content="#f9f8f6">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
-  <!-- 最適化: Google Fontsを非同期で読み込む設定 -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" media="print" onload="this.media='all'">
   <noscript>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap">
   </noscript>
-
+  
   <style>
     :root{--brand-green:#2c4c3b;--brand-orange:#a84b18;--brand-dark:#222;--brand-gray:#525252;--brand-light:#f9f8f6}
     *{box-sizing:border-box}
