@@ -3,16 +3,16 @@ export default {
     try {
       const response = await fetch(request);
       if (response.status >= 500) {
-        return await returnMaintenancePage(request);
+        return returnMaintenancePage();
       }
       return response;
     } catch (e) {
-      return await returnMaintenancePage(request);
+      return returnMaintenancePage();
     }
   }
 };
 
-async function returnMaintenancePage(request) {
+function returnMaintenancePage() {
   const html = `<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -76,29 +76,13 @@ async function returnMaintenancePage(request) {
 </body>
 </html>`;
 
-  const acceptEncoding = request ? (request.headers.get('Accept-Encoding') || '') : '';
-
-  const headers = new Headers({
-    "Content-Type": "text/html;charset=UTF-8",
-    "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate, no-transform",
-    "Retry-After": "3600",
-    "X-Content-Type-Options": "nosniff"
+  return new Response(html, {
+    status: 503,
+    headers: {
+      "Content-Type": "text/html;charset=UTF-8",
+      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+      "Retry-After": "3600",
+      "X-Content-Type-Options": "nosniff"
+    }
   });
-
-  if (acceptEncoding.includes('gzip')) {
-    const stream = new Response(html).body.pipeThrough(new CompressionStream('gzip'));
-    const buffer = await new Response(stream).arrayBuffer();
-    headers.set('Content-Encoding', 'gzip');
-    headers.set('Content-Length', buffer.byteLength.toString());
-    return new Response(buffer, { status: 200, headers });
-  }
-  else if (acceptEncoding.includes('deflate')) {
-    const stream = new Response(html).body.pipeThrough(new CompressionStream('deflate'));
-    const buffer = await new Response(stream).arrayBuffer();
-    headers.set('Content-Encoding', 'deflate');
-    headers.set('Content-Length', buffer.byteLength.toString());
-    return new Response(buffer, { status: 200, headers });
-  }
-
-  return new Response(html, { status: 200, headers });
 }
