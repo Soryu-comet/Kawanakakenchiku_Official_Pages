@@ -28,6 +28,7 @@ function returnMaintenancePage() {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>メンテナンス中 | 川中建築</title>
   <meta name="description" content="川中建築の公式サイトは現在メンテナンス中です。お急ぎの方はお電話またはメールにてお問い合わせください。">
+  <meta name="theme-color" content="#f9f8f6">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap&font-display=swap" rel="stylesheet">
@@ -50,7 +51,9 @@ function returnMaintenancePage() {
       padding: 0;
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-y: auto;
+      overflow-x: hidden;
       text-align: center;
       line-height: 1.8;
       -webkit-font-smoothing: antialiased;
@@ -134,17 +137,9 @@ function returnMaintenancePage() {
       font-weight: 500;
       margin-top: 1rem;
     }
-    .contact-info .tel {
-      font-family: 'Shippori Mincho', serif;
-      font-size: 1.5rem;
-      color: var(--brand-dark);
-      display: block;
-      margin-top: 0.2rem;
-      text-decoration: none;
-      padding: 0.5rem; /* Touch target size */
-    }
     
-    .email-wrapper {
+    /* 連絡先の共通ラッパー */
+    .contact-item-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -152,15 +147,25 @@ function returnMaintenancePage() {
       margin-top: 0.8rem;
       flex-wrap: wrap;
     }
+
+    .contact-info .tel {
+      font-family: 'Shippori Mincho', serif;
+      font-size: 1.5rem;
+      color: var(--brand-dark);
+      display: block;
+      margin-top: 0.2rem;
+      padding: 0.5rem;
+    }
+    
     .contact-info .email {
       color: var(--brand-green);
       font-size: 0.9rem;
       font-weight: 500;
-      text-decoration: none;
       letter-spacing: 0.05em;
       word-break: break-all;
       padding: 0.5rem 0;
     }
+    
     .copy-btn {
       background: #f0f0f0;
       border: none;
@@ -172,10 +177,11 @@ function returnMaintenancePage() {
       justify-content: center;
       transition: all 0.2s;
       color: var(--brand-gray);
-      min-width: 44px; /* PSI Accessibility requirement */
+      min-width: 44px; /* タップ領域のアクセシビリティ確保 */
       min-height: 44px;
+      outline: none;
     }
-    .copy-btn:hover {
+    .copy-btn:hover, .copy-btn:focus-visible {
       background: #e5e5e5;
       color: var(--brand-dark);
     }
@@ -186,20 +192,39 @@ function returnMaintenancePage() {
       width: 1.1rem;
       height: 1.1rem;
     }
+    .copy-btn-container {
+      position: relative;
+    }
     .tooltip {
       position: absolute;
       background: var(--brand-dark);
       color: white;
-      font-size: 0.7rem;
-      padding: 0.3rem 0.6rem;
+      font-size: 0.75rem;
+      padding: 0.4rem 0.8rem;
       border-radius: 0.3rem;
-      bottom: 110%;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap; /* 縦長改行を阻止 */
       opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s, visibility 0.2s;
       pointer-events: none;
-      transition: opacity 0.3s;
+      z-index: 10;
     }
-    .copy-btn-container {
-      position: relative;
+    .tooltip::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 4px;
+      border-style: solid;
+      border-color: var(--brand-dark) transparent transparent transparent;
+    }
+    .tooltip.show {
+      opacity: 1;
+      visibility: visible;
     }
     
     footer {
@@ -208,6 +233,7 @@ function returnMaintenancePage() {
       color: rgba(255, 255, 255, 0.4);
       font-size: 0.7rem;
       letter-spacing: 0.2em;
+      width: 100%;
     }
     
     .md-hidden {
@@ -250,15 +276,29 @@ function returnMaintenancePage() {
     <h3 id="contact-heading" class="font-serif">お急ぎのご用件はこちら</h3>
     <p>兵庫県豊岡市城崎町来日710-1</p>
     <p class="hours">受付時間：8:00 〜 17:00（日・祝除く）</p>
-    <a href="tel:0796322264" class="tel" aria-label="電話番号：0796-32-2264">0796-32-2264</a>
-    <div class="email-wrapper">
-      <a href="mailto:contact@kawanakakenchiku.com" class="email" id="email-link">contact@kawanakakenchiku.com</a>
+    
+    <!-- 電話番号エリア -->
+    <div class="contact-item-wrapper">
+      <span class="tel" id="tel-text" aria-label="電話番号：0796-32-2264">0796-32-2264</span>
       <div class="copy-btn-container">
-        <button class="copy-btn" id="copy-btn" title="メールアドレスをコピー" aria-label="メールアドレスをコピー">
+        <button class="copy-btn" onclick="copyText('tel-text', this)" title="電話番号をコピー" aria-label="電話番号をコピー">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
           </svg>
-          <span class="tooltip" id="copy-tooltip">コピーしました</span>
+          <span class="tooltip">コピーしました</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- メールアドレスエリア -->
+    <div class="contact-item-wrapper">
+      <span class="email" id="email-text">contact@kawanakakenchiku.com</span>
+      <div class="copy-btn-container">
+        <button class="copy-btn" onclick="copyText('email-text', this)" title="メールアドレスをコピー" aria-label="メールアドレスをコピー">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2" />
+          </svg>
+          <span class="tooltip">コピーしました</span>
         </button>
       </div>
     </div>
@@ -270,18 +310,29 @@ function returnMaintenancePage() {
 </footer>
 
 <script>
-  document.getElementById('copy-btn').addEventListener('click', function() {
-    const email = document.getElementById('email-link').innerText;
-    navigator.clipboard.writeText(email).then(function() {
-      const tooltip = document.getElementById('copy-tooltip');
-      tooltip.style.opacity = '1';
+  function copyText(elementId, btnElement) {
+    const text = document.getElementById(elementId).innerText;
+    navigator.clipboard.writeText(text).then(function() {
+      // 押されたボタン内のツールチップを取得
+      const tooltip = btnElement.querySelector('.tooltip');
+      
+      // 他の表示されているツールチップがあれば消す
+      document.querySelectorAll('.tooltip.show').forEach(function(el) {
+        if(el !== tooltip) el.classList.remove('show');
+      });
+
+      // 表示
+      tooltip.classList.add('show');
+      
+      // 2秒後に消す
       setTimeout(function() {
-        tooltip.style.opacity = '0';
+        tooltip.classList.remove('show');
       }, 2000);
     }).catch(function(err) {
       console.error('コピーに失敗しました', err);
+      alert('コピーに失敗しました。');
     });
-  });
+  }
 </script>
 </body>
 </html>`;
@@ -290,7 +341,10 @@ function returnMaintenancePage() {
   return new Response(html, {
     status: 503,
     headers: {
-      "Content-Type": "text/html;charset=UTF-8"
+      "Content-Type": "text/html;charset=UTF-8",
+      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate", // 503をキャッシュさせない
+      "Retry-After": "3600", // クローラーに対して1時間後の再試行を促す(SEO対策)
+      "X-Content-Type-Options": "nosniff" // セキュリティベストプラクティス
     }
   });
 }
