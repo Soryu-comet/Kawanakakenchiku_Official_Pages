@@ -3,16 +3,16 @@ export default {
     try {
       const response = await fetch(request);
       if (response.status >= 500) {
-        return returnMaintenancePage(request);
+        return await returnMaintenancePage(request);
       }
       return response;
     } catch (e) {
-      return returnMaintenancePage(request);
+      return await returnMaintenancePage(request);
     }
   }
 };
 
-function returnMaintenancePage(request) {
+async function returnMaintenancePage(request) {
   const html = `<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -86,17 +86,23 @@ function returnMaintenancePage(request) {
   });
 
   if (acceptEncoding.includes('gzip')) {
-    headers.set('Content-Encoding', 'gzip');
     const stream = new Response(html).body.pipeThrough(new CompressionStream('gzip'));
-    return new Response(stream, { status: 503, headers });
+    const buffer = await new Response(stream).arrayBuffer();
+
+    headers.set('Content-Encoding', 'gzip');
+    headers.set('Content-Length', buffer.byteLength.toString());
+
+    return new Response(buffer, { status: 503, headers });
   }
   else if (acceptEncoding.includes('deflate')) {
-    headers.set('Content-Encoding', 'deflate');
     const stream = new Response(html).body.pipeThrough(new CompressionStream('deflate'));
-    return new Response(stream, { status: 503, headers });
+    const buffer = await new Response(stream).arrayBuffer();
+
+    headers.set('Content-Encoding', 'deflate');
+    headers.set('Content-Length', buffer.byteLength.toString());
+
+    return new Response(buffer, { status: 503, headers });
   }
-  return new Response(html, {
-    status: 503,
-    headers
-  });
+
+  return new Response(html, { status: 503, headers });
 }
