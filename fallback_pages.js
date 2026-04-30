@@ -29,19 +29,30 @@ function returnMaintenancePage() {
   <title>メンテナンス中 | 川中建築</title>
   <meta name="description" content="川中建築の公式サイトは現在メンテナンス中です。お急ぎの方はお電話またはメールにてお問い合わせください。">
   <meta name="theme-color" content="#f9f8f6">
+  
+  <!-- Webフォントの非同期読み込み（レンダリングブロック回避） -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap&font-display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap" media="print" onload="this.media='all'">
+  <noscript>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@500&family=Zen+Kaku+Gothic+New:wght@400;500&display=swap">
+  </noscript>
+
   <style>
     :root {
       --brand-green: #2c4c3b;
-      --brand-orange: #c85a17;
+      /* コントラスト比の基準をクリアするため、少しだけ明度を落としたオレンジ */
+      --brand-orange: #a84b18; 
       --brand-dark: #222222;
       --brand-gray: #525252;
       --brand-light: #f9f8f6;
     }
     * {
       box-sizing: border-box;
+    }
+    html, body {
+      height: 100%;
     }
     body {
       background-color: var(--brand-light);
@@ -57,8 +68,16 @@ function returnMaintenancePage() {
       text-align: center;
       line-height: 1.8;
       -webkit-font-smoothing: antialiased;
+
+      /* スクロールバーの非表示化（スクロール機能は維持） */
+      -ms-overflow-style: none; /* IE, Edge */
+      scrollbar-width: none; /* Firefox */
     }
-    h1, h2, h3, .font-serif {
+    body::-webkit-scrollbar {
+      display: none; /* Chrome, Safari */
+    }
+    
+    h1, h2, .font-serif {
       font-family: 'Shippori Mincho', serif;
     }
     main {
@@ -67,13 +86,13 @@ function returnMaintenancePage() {
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: 5rem 1.5rem;
+      padding: 4rem 1.5rem;
       width: 100%;
       max-width: 800px;
       margin: 0 auto;
     }
     .logo {
-      margin-bottom: 3rem;
+      margin-bottom: 2.5rem;
     }
     .logo-text {
       font-family: 'Shippori Mincho', serif;
@@ -103,7 +122,7 @@ function returnMaintenancePage() {
     .message {
       color: var(--brand-gray);
       max-width: 600px;
-      margin-bottom: 4rem;
+      margin-bottom: 3.5rem;
       font-size: 0.95rem;
       letter-spacing: 0.05em;
       line-height: 2.2;
@@ -118,8 +137,9 @@ function returnMaintenancePage() {
       width: 100%;
       border-top: 4px solid var(--brand-green);
     }
-    .contact-info h3 {
+    .contact-info h2 {
       font-size: 1.1rem;
+      font-weight: 500;
       margin-top: 0;
       margin-bottom: 1.5rem;
       color: var(--brand-dark);
@@ -138,12 +158,12 @@ function returnMaintenancePage() {
       margin-top: 1rem;
     }
     
-    /* 連絡先の共通ラッパー */
+    /* 連絡先アイテム（テキストとボタンの並び） */
     .contact-item-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
+      gap: 0.25rem;
       margin-top: 0.8rem;
       flex-wrap: wrap;
     }
@@ -154,7 +174,7 @@ function returnMaintenancePage() {
       color: var(--brand-dark);
       display: block;
       margin-top: 0.2rem;
-      padding: 0.5rem;
+      padding: 0.25rem 0.5rem;
     }
     
     .contact-info .email {
@@ -163,30 +183,30 @@ function returnMaintenancePage() {
       font-weight: 500;
       letter-spacing: 0.05em;
       word-break: break-all;
-      padding: 0.5rem 0;
+      padding: 0.25rem 0.5rem;
     }
     
+    /* コピーボタンの洗練（コンセプトに合わせて透明・シンプルに） */
     .copy-btn {
-      background: #f0f0f0;
+      background: transparent;
       border: none;
-      border-radius: 0.4rem;
-      padding: 0.4rem;
+      border-radius: 50%; /* 丸くして上品に */
       cursor: pointer;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
-      color: var(--brand-gray);
-      min-width: 44px; /* タップ領域のアクセシビリティ確保 */
+      transition: all 0.2s ease;
+      color: #999;
+      min-width: 44px;
       min-height: 44px;
       outline: none;
     }
     .copy-btn:hover, .copy-btn:focus-visible {
-      background: #e5e5e5;
-      color: var(--brand-dark);
+      background: rgba(44, 76, 59, 0.08); /* ホバー時にブランドグリーンを薄く敷く */
+      color: var(--brand-green);
     }
     .copy-btn:active {
-      transform: scale(0.95);
+      transform: scale(0.9);
     }
     .copy-btn svg {
       width: 1.1rem;
@@ -202,10 +222,10 @@ function returnMaintenancePage() {
       font-size: 0.75rem;
       padding: 0.4rem 0.8rem;
       border-radius: 0.3rem;
-      bottom: calc(100% + 8px);
+      bottom: calc(100% + 4px);
       left: 50%;
       transform: translateX(-50%);
-      white-space: nowrap; /* 縦長改行を阻止 */
+      white-space: nowrap; /* 縦長バグ防止 */
       opacity: 0;
       visibility: hidden;
       transition: opacity 0.2s, visibility 0.2s;
@@ -228,21 +248,23 @@ function returnMaintenancePage() {
     }
     
     footer {
-      padding: 2.5rem 2rem;
+      padding: 1.5rem 2rem;
       background: var(--brand-dark);
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
+      color: #a3a3a3; /* コントラスト比改善 */
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
       width: 100%;
+      margin-top: auto;
     }
     
     .md-hidden {
       display: none;
     }
 
+    /* レスポンシブ対応 */
     @media (max-width: 768px) {
       main {
-        padding: 4rem 1.25rem;
+        padding: 3rem 1.25rem;
         justify-content: flex-start;
       }
       .logo { margin-bottom: 2rem; }
@@ -273,7 +295,7 @@ function returnMaintenancePage() {
   </p>
 
   <section class="contact-info" aria-labelledby="contact-heading">
-    <h3 id="contact-heading" class="font-serif">お急ぎのご用件はこちら</h3>
+    <h2 id="contact-heading" class="font-serif">お急ぎのご用件はこちら</h2>
     <p>兵庫県豊岡市城崎町来日710-1</p>
     <p class="hours">受付時間：8:00 〜 17:00（日・祝除く）</p>
     
@@ -313,18 +335,14 @@ function returnMaintenancePage() {
   function copyText(elementId, btnElement) {
     const text = document.getElementById(elementId).innerText;
     navigator.clipboard.writeText(text).then(function() {
-      // 押されたボタン内のツールチップを取得
       const tooltip = btnElement.querySelector('.tooltip');
       
-      // 他の表示されているツールチップがあれば消す
       document.querySelectorAll('.tooltip.show').forEach(function(el) {
         if(el !== tooltip) el.classList.remove('show');
       });
 
-      // 表示
       tooltip.classList.add('show');
       
-      // 2秒後に消す
       setTimeout(function() {
         tooltip.classList.remove('show');
       }, 2000);
@@ -342,9 +360,9 @@ function returnMaintenancePage() {
     status: 503,
     headers: {
       "Content-Type": "text/html;charset=UTF-8",
-      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate", // 503をキャッシュさせない
-      "Retry-After": "3600", // クローラーに対して1時間後の再試行を促す(SEO対策)
-      "X-Content-Type-Options": "nosniff" // セキュリティベストプラクティス
+      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+      "Retry-After": "3600",
+      "X-Content-Type-Options": "nosniff"
     }
   });
 }
