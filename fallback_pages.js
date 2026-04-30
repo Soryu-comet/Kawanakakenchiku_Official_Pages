@@ -3,16 +3,17 @@ export default {
     try {
       const response = await fetch(request);
       if (response.status >= 500) {
-        return returnMaintenancePage();
+        // リクエストヘッダーを確認するため、requestを渡します
+        return returnMaintenancePage(request);
       }
       return response;
     } catch (e) {
-      return returnMaintenancePage();
+      return returnMaintenancePage(request);
     }
   }
 };
 
-function returnMaintenancePage() {
+function returnMaintenancePage(request) {
   const html = `<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -76,13 +77,35 @@ function returnMaintenancePage() {
 </body>
 </html>`;
 
+  // クライアントが許容するエンコーディングを取得
+  const acceptEncoding = request ? (request.headers.get('Accept-Encoding') || '') : '';
+
+  // 共通のレスポンスヘッダー
+  const headers = new Headers({
+    "Content-Type": "text/html;charset=UTF-8",
+    "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
+    "Retry-After": "3600",
+    "X-Content-Type-Options": "nosniff"
+  });
+
+  // gzipがサポートされている場合
+  if (acceptEncoding.includes('gzip')) {
+    headers.set('Content-Encoding', 'gzip');
+    // HTML文字列をストリームに変換し、gzipで圧縮
+    const stream = new Response(html).body.pipeThrough(new CompressionStream('gzip'));
+    return new Response(stream, { status: 503, headers });
+  }
+  // deflateがサポートされている場合
+  else if (acceptEncoding.includes('deflate')) {
+    headers.set('Content-Encoding', 'deflate');
+    // HTML文字列をストリームに変換し、deflateで圧縮
+    const stream = new Response(html).body.pipeThrough(new CompressionStream('deflate'));
+    return new Response(stream, { status: 503, headers });
+  }
+
+  // 圧縮非対応のクライアントにはそのまま返す
   return new Response(html, {
     status: 503,
-    headers: {
-      "Content-Type": "text/html;charset=UTF-8",
-      "Cache-Control": "no-store, no-cache, must-revalidate, proxy-revalidate",
-      "Retry-After": "3600",
-      "X-Content-Type-Options": "nosniff"
-    }
+    headers
   });
 }
