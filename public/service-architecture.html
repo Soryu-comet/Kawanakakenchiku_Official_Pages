@@ -1,227 +1,287 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
- <meta charset="UTF-8">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="木の温もりを活かした住まいと、暮らしを支える確かな技術。新築・リフォームから日々の電気工事まで、住まいの困りごとに寄り添います。" />
-  <meta property="og:title" content="建築・リフォーム・電気工事 | 川中建築" />
-  <meta property="og:description" content="木の温もりを活かした住まいと、暮らしを支える確かな技術。新築・リフォームから日々の電気工事まで、住まいの困りごとに寄り添います。" />
-  <meta property="og:url" content="https://kawanakakenchiku.com/service-architecture" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://kawanakakenchiku.com/static/images/ogp-image.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
- <title>建築・リフォーム・電気工事 | 川中建築</title>
-  <link rel="icon" type="image/png" href="/static/images/favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/static/images/favicon/favicon.svg" />
-  <link rel="shortcut icon" href="/static/images/favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="川中建築" />
-  <link rel="manifest" href="/static/images/favicon/site.webmanifest" />
-  <link rel="canonical" href="https://kawanakakenchiku.com/service-architecture" />
- 
- <link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap" rel="stylesheet">
- <link rel="stylesheet" href="static/css/style.css">
- <link rel="stylesheet" href="static/css/tailwind-output.css">
- 
- <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
- <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
- <script src="https://unpkg.com/split-type"></script>
- <script src="static/js/main.js" defer></script>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="description" content="木の温もりを活かした住まいと、暮らしを支える確かな技術。新築・リフォームから日々の電気工事まで、住まいの困りごとに寄り添います。" />
+   <meta property="og:title" content="建築・リフォーム・電気工事 | 川中建築" />
+   <meta property="og:description" content="木の温もりを活かした住まいと、暮らしを支える確かな技術。新築・リフォームから日々の電気工事まで、住まいの困りごとに寄り添います。" />
+   <meta property="og:url" content="https://kawanakakenchiku.com/service-architecture" />
+   <meta property="og:type" content="website" />
+   <meta property="og:image" content="https://kawanakakenchiku.com/static/images/ogp-image.jpg" />
+   <meta name="twitter:card" content="summary_large_image" />
+   <title>建築・リフォーム・電気工事 | 川中建築</title>
+   <link rel="icon" type="image/png" href="/static/images/favicon/favicon-96x96.png" sizes="96x96" />
+   <link rel="icon" type="image/svg+xml" href="/static/images/favicon/favicon.svg" />
+   <link rel="shortcut icon" href="/static/images/favicon/favicon.ico" />
+   <link rel="apple-touch-icon" sizes="180x180" href="/static/images/favicon/apple-touch-icon.png" />
+   <meta name="apple-mobile-web-app-title" content="川中建築" />
+   <link rel="manifest" href="/static/images/favicon/site.webmanifest" />
+   <link rel="canonical" href="https://kawanakakenchiku.com/service-architecture" />
+
+   <link
+      href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&family=Zen+Kaku+Gothic+New:wght@300;400;500;700&display=swap"
+      rel="stylesheet">
+   <link rel="stylesheet" href="static/css/style.css">
+   <link rel="stylesheet" href="static/css/tailwind-output.css">
+
+   <script src="https://unpkg.com/lenis@1.0.45/dist/lenis.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+   <script src="https://unpkg.com/split-type"></script>
+   <script src="static/js/main.js" defer></script>
 </head>
+
 <body class="bg-brand-light text-brand-dark antialiased flex flex-col min-h-screen">
- <div id="custom-cursor"></div>
+   <div id="custom-cursor"></div>
 
- <div id="page-transition" class="fixed inset-0 bg-brand-dark z-[9999] pointer-events-none origin-bottom translate-y-full transition-transform duration-700 ease-in-out flex items-center justify-center">
-  <div class="w-12 h-12 border-4 border-white/20 border-t-brand-orange rounded-full animate-spin transition-opacity duration-300 opacity-0" id="page-transition-spinner"></div>
- </div>
- <canvas id="ambient-canvas" class="fixed inset-0 pointer-events-none z-[-1] opacity-50"></canvas>
-
- <header class="fixed w-full z-[100] top-0 transition-all duration-300 py-4 header-glass" id="header">
-  <div class="container mx-auto px-6 max-w-7xl flex justify-between items-center">
-   <a href="/" class="z-50 relative magnetic-btn">
-    <img src="static/images/image_b94ab1.png" alt="川中建築" id="header-logo-img" class="h-9 md:h-11 transition-all duration-300">
-   </a>
-   
-   <nav class="hidden md:flex items-center space-x-12 z-50">
-    <a href="/" class="font-medium text-brand-dark hover:text-brand-green transition-colors nav-link magnetic-btn tracking-widest text-[13px]">ホーム</a>
-    <a href="/about-pellet" class="font-medium text-brand-dark hover:text-brand-green transition-colors nav-link magnetic-btn tracking-widest text-[13px]">ペレットとは</a>
-    <a href="/#services" class="font-medium text-brand-dark hover:text-brand-green transition-colors nav-link magnetic-btn tracking-widest text-[13px]">事業内容</a>
-    <a href="/contact" class="magnetic-btn ml-6 px-10 py-4 bg-brand-orange text-white font-medium rounded-full hover:bg-[#b04d13] transition-all shadow-md tracking-widest text-[13px]">
-     お問い合わせ
-    </a>
-   </nav>
-  
-   <button id="menu-btn" class="md:hidden z-50 focus:outline-none group relative w-10 h-10 flex flex-col justify-center items-center magnetic-btn" aria-label="メニューを開く" aria-expanded="false">
-    <div class="w-7 h-[1px] bg-brand-dark mb-2 transition-all duration-300" id="bar1"></div>
-    <div class="w-7 h-[1px] bg-brand-dark mb-2 transition-all duration-300" id="bar2"></div>
-    <div class="w-7 h-[1px] bg-brand-dark transition-all duration-300" id="bar3"></div>
-   </button>
-</div>
- </header>
- <!-- Mobile Menu -->
- <div id="mobile-menu" class="fixed inset-0 bg-brand-light z-40 hidden flex-col justify-start pt-36 px-10 opacity-0 transition-opacity duration-300 overflow-y-auto">
-  <nav class="w-full">
-   <ul class="space-y-10 pb-16">
-    <li class="group border-b border-gray-200 pb-6">
-     <a href="/" class="block magnetic-btn">
-      <span class="block text-xs font-bold text-brand-green tracking-widest mb-2 transition-transform duration-300 group-hover:translate-x-1">HOME</span>
-      <span class="block text-2xl font-serif text-brand-dark transition-colors duration-300 group-hover:text-brand-green">ホーム</span>
-     </a>
-    </li>
-    <li class="group border-b border-gray-200 pb-6">
-     <a href="/about-pellet" class="block magnetic-btn">
-      <span class="block text-xs font-bold text-brand-green tracking-widest mb-2 transition-transform duration-300 group-hover:translate-x-1">ABOUT PELLET</span>
-      <span class="block text-2xl font-serif text-brand-dark transition-colors duration-300 group-hover:text-brand-green">ペレットとは</span>
-     </a>
-    </li>
-    <li class="group border-b border-gray-200 pb-6">
-     <a href="/#services" class="block magnetic-btn">
-      <span class="block text-xs font-bold text-brand-green tracking-widest mb-2 transition-transform duration-300 group-hover:translate-x-1">SERVICES</span>
-      <span class="block text-2xl font-serif text-brand-dark transition-colors duration-300 group-hover:text-brand-green">事業内容</span>
-     </a>
-    </li>
-    <li class="pt-8">
-     <a href="/contact" class="flex items-center justify-center w-full py-4 bg-brand-orange text-white text-base font-medium rounded-full hover:bg-[#b04d13] transition-all shadow-md tracking-widest magnetic-btn">
-      お問い合わせ
-     </a>
-    </li>
-   </ul>
-  </nav>
- </div>
-
-
- <main class="flex-grow pt-24 pb-16 md:pt-32 md:pb-32">
-  <div class="max-w-5xl mx-auto px-6 fade-in-up">
-   
-   <div class="text-center mb-12 md:mb-20 fade-in-up">
-    <span class="text-brand-dark font-bold tracking-[0.3em] text-[11px] md:text-[13px] uppercase mb-4 block">Architecture & Electrical</span>
-    <h1 class="font-serif text-3xl md:text-5xl font-medium mb-6 text-brand-dark tracking-wide">建築・電気工事・リフォーム</h1>
-    <p class="text-brand-gray text-[14px] leading-[2] tracking-wider max-w-2xl mx-auto">
-     創業46年の確かな実績による建築技術と、<br>現代の暮らしに最適化した電気工事のノウハウで住まいを総合的にサポートします。
-    </p>
+   <div id="page-transition"
+      class="fixed inset-0 bg-brand-dark z-[9999] pointer-events-none origin-bottom translate-y-full transition-transform duration-700 ease-in-out flex items-center justify-center">
+      <div
+         class="w-12 h-12 border-4 border-white/20 border-t-brand-orange rounded-full animate-spin transition-opacity duration-300 opacity-0"
+         id="page-transition-spinner"></div>
    </div>
+   <canvas id="ambient-canvas" class="fixed inset-0 pointer-events-none z-[-1] opacity-50"></canvas>
 
-   <div class="h-[400px] md:h-[500px] w-full rounded-3xl overflow-hidden mb-16 md:mb-24 shadow-soft relative fade-in-up bg-[#f0eee9]">
-    <img src="static/images/messageImage_1775812322442.jpg" alt="建築・リフォーム" class="absolute inset-0 w-full h-full object-cover">
-   </div>
+   <header class="fixed w-full z-[100] top-0 transition-all duration-300 py-4 header-glass" id="header">
+      <div class="container mx-auto px-6 max-w-7xl flex justify-between items-center">
+         <a href="/" class="z-50 relative magnetic-btn">
+            <img src="static/images/image_b94ab1.png" alt="川中建築" id="header-logo-img"
+               class="h-9 md:h-11 transition-all duration-300">
+         </a>
 
-   <!-- Section 1: Architecture -->
-   <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mb-16 md:mb-24 items-center fade-in-up">
-    <!-- Image (Left on PC, Top on Mobile) -->
-    <div class="order-1 h-80 w-full rounded-2xl overflow-hidden shadow-soft relative group">
-     <img src="static/images/cba97485-725b-4e8e-b1d6-49f2a41a35f9~1.jpg" alt="新築・リフォーム施工例" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-    </div>
-    <!-- Text (Right on PC, Bottom on Mobile) -->
-    <div class="order-2">
-     <h2 class="font-serif text-2xl font-medium mb-6 text-brand-dark border-b border-gray-100 pb-4">新築・リフォーム事業</h2>
-     <p class="text-brand-gray text-[14px] leading-loose tracking-wider mb-6">
-      長年培ってきた大工の技術を活かした安心の施工。水回りの修繕から、間取り変更を伴う大規模なリノベーション、新築の設計・施工まで住まいの「器」を確かな技術で築き上げます。地域の風土を理解した暖かく過ごしやすい家づくりをご提案します。
-     </p>
-    </div>
-   </div>
+         <nav class="hidden md:flex items-center space-x-12 z-50">
+            <a href="/"
+               class="font-medium text-brand-dark hover:text-brand-green transition-colors nav-link magnetic-btn tracking-widest text-[13px]">ホーム</a>
+            <a href="/about-pellet"
+               class="font-medium text-brand-dark hover:text-brand-green transition-colors nav-link magnetic-btn tracking-widest text-[13px]">ペレットとは</a>
+            <a href="/#services"
+               class="font-medium text-brand-dark hover:text-brand-green transition-colors nav-link magnetic-btn tracking-widest text-[13px]">事業内容</a>
+            <a href="/contact"
+               class="magnetic-btn ml-6 px-10 py-4 bg-brand-orange text-white font-medium rounded-full hover:bg-[#b04d13] transition-all shadow-md tracking-widest text-[13px]">
+               お問い合わせ
+            </a>
+         </nav>
 
-   <!-- Section 2: Electrical Works -->
-   <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mb-16 md:mb-24 items-center fade-in-up">
-    <!-- Text (Left on PC, Bottom on Mobile) -->
-    <div class="order-2 md:order-1">
-     <h2 class="font-serif text-2xl font-medium mb-6 text-brand-dark border-b border-gray-100 pb-4">専門的な電気工事</h2>
-     <p class="text-brand-gray text-[14px] leading-loose tracking-wider mb-6">
-      現代の住まいに欠かせない電気設備も、豊富な知見を持つ有資格者が対応します。建築と電気、両側面から設計できるのが当社の強みです。
-     </p>
-     <ul class="space-y-4 text-brand-dark text-[14px] font-medium tracking-wider">
-      <li class="flex items-center"><span class="w-1.5 h-1.5 bg-brand-green rounded-full mr-4"></span>エコキュートの設置・交換</li>
-      <li class="flex items-center"><span class="w-1.5 h-1.5 bg-brand-green rounded-full mr-4"></span>エアコン設置・保守</li>
-      <li class="flex items-center"><span class="w-1.5 h-1.5 bg-brand-green rounded-full mr-4"></span>オール電化工事</li>
-      <li class="flex items-center"><span class="w-1.5 h-1.5 bg-brand-green rounded-full mr-4"></span>太陽光発電システム・各種電気配線</li>
-     </ul>
-    </div>
-    <!-- Image (Right on PC, Top on Mobile) -->
-    <div class="order-1 md:order-2 h-80 w-full rounded-2xl overflow-hidden shadow-soft relative group">
-     <img src="static/images/FB_IMG_1777363672276.jpg" alt="電気工事施工例" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-    </div>
-   </div>
-
-   <!-- Section 3: PHEV -->
-   <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mb-16 md:mb-24 items-center fade-in-up">
-    <!-- Image (Left on PC, Top on Mobile) -->
-    <div class="order-1 h-80 w-full rounded-2xl overflow-hidden shadow-soft relative group">
-     <img src="static/images/597950267_4245522692433589_8623134042069803363_n.jpg" alt="PHEV充電設備" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-    </div>
-    <!-- Text (Right on PC, Bottom on Mobile) -->
-    <div class="order-2">
-     <h2 class="font-serif text-2xl font-medium mb-6 text-brand-dark border-b border-gray-100 pb-4">PHEV・EV充電設備の施工</h2>
-     <p class="text-brand-gray text-[14px] leading-loose tracking-wider mb-6">
-      電気自動車(EV)やプラグインハイブリッドカー(PHEV)の普及に伴い、ご自宅での充電インフラ工事・コンセント増設等も承っております。長年現場を支えてきた熟練の電気工事士による、安全で確実な配線施工をお約束いたします。
-     </p>
-    </div>
-   </div>
-
-   <!-- Contact CTA -->
-   <div class="text-center mt-16 fade-in-up">
-    <p class="text-brand-gray text-[14px] leading-loose mb-10">
-     住まいの小さなお困りごとから、ペレットストーブと組み合わせたエコなリノベーションまで、<br>お見積りやご相談はいつでも受け付けております。
-    </p>
-    <a href="/contact" class="magnetic-btn inline-flex items-center justify-center px-12 py-5 bg-brand-dark text-white font-medium hover:bg-black transition-all rounded-full tracking-[0.2em] text-[13px] shadow-md">
-     お見積り・お問い合わせ
-    </a>
-   </div>
-
-  </div>
- </main>
-
- <footer class="bg-brand-dark text-white pt-20 md:pt-32 pb-10 border-t border-brand-green/20 relative overflow-hidden">
-  <div class="container mx-auto px-6 max-w-7xl relative z-10 fade-in-up">
-   <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-12 md:mb-20">
-    
-    <!-- Brand Info Section -->
-    <div class="md:col-span-5 flex flex-col items-start">
-     <img src="static/images/image_b94ab1.png" alt="川中建築" class="h-10 md:h-12 mb-8 opacity-90 logo-white">
-     <p class="text-[14px] font-normal text-brand-light opacity-70 leading-[2.2] tracking-widest mb-8 font-serif">
-      火を囲み、森と暮らす。<br>環境と調和する豊かな住まいをご提案します。
-     </p>
-     <a href="/contact" class="flex items-center space-x-4 group magnetic-btn">
-      <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-brand-orange group-hover:border-transparent transition-all duration-300">
-       <svg class="w-4 h-4 text-white group-hover:transform group-hover:translate-x-1.5 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+         <button id="menu-btn"
+            class="md:hidden z-50 focus:outline-none group relative w-10 h-10 flex flex-col justify-center items-center magnetic-btn"
+            aria-label="メニューを開く" aria-expanded="false">
+            <div class="w-7 h-[1px] bg-brand-dark mb-2 transition-all duration-300" id="bar1"></div>
+            <div class="w-7 h-[1px] bg-brand-dark mb-2 transition-all duration-300" id="bar2"></div>
+            <div class="w-7 h-[1px] bg-brand-dark transition-all duration-300" id="bar3"></div>
+         </button>
       </div>
-      <span class="text-[12px] font-medium tracking-[0.2em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">Contact Us</span>
-     </a>
-    </div>
-
-    <div class="md:col-span-1"></div>
-
-    <!-- Navigation -->
-    <div class="md:col-span-3">
-     <h4 class="text-[10px] font-bold text-brand-green tracking-[0.3em] uppercase mb-8 opacity-80">Menu</h4>
-     <ul class="space-y-5 text-[13px] font-medium tracking-[0.15em] text-brand-light opacity-80">
-      <li><a href="/" class=" hover:text-brand-orange magnetic-btn hover:opacity-100 transition-colors inline-block relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-brand-orange hover:after:w-full after:transition-all after:duration-300">ホーム</a></li>
-      <li><a href="/about-pellet" class=" hover:text-brand-orange magnetic-btn hover:opacity-100 transition-colors inline-block relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-brand-orange hover:after:w-full after:transition-all after:duration-300">ペレットとは</a></li>
-      <li><a href="/#services" class=" hover:text-brand-orange magnetic-btn hover:opacity-100 transition-colors inline-block relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-brand-orange hover:after:w-full after:transition-all after:duration-300">事業内容</a></li>
-     </ul>
-    </div>
-
-    <!-- Information -->
-    <div class="md:col-span-3">
-     <h4 class="text-[10px] font-bold text-brand-green tracking-[0.3em] uppercase mb-8 opacity-80">Information</h4>
-     <ul class="space-y-4 text-[13px] font-normal text-brand-light opacity-70 leading-loose tracking-widest mb-8">
-      <li>〒669-6115</li>
-      <li>兵庫県豊岡市城崎町来日710-1</li>
-      <li>TEL: <span class="font-serif text-[15px] tracking-normal">0796-32-2264</span></li>
-     </ul>
-     <a href="/privacy-policy" class="text-[11px] text-brand-light opacity-60 hover:opacity-100 hover:text-brand-orange magnetic-btn transition-colors tracking-widest border-b border-white/20 pb-1">プライバシーポリシー</a>
-    </div>
+   </header>
+   <!-- Mobile Menu -->
+   <div id="mobile-menu"
+      class="fixed inset-0 bg-brand-light z-40 hidden flex-col justify-start pt-36 px-10 opacity-0 transition-opacity duration-300 overflow-y-auto">
+      <nav class="w-full">
+         <ul class="space-y-10 pb-16">
+            <li class="group border-b border-gray-200 pb-6">
+               <a href="/" class="block magnetic-btn">
+                  <span
+                     class="block text-xs font-bold text-brand-green tracking-widest mb-2 transition-transform duration-300 group-hover:translate-x-1">HOME</span>
+                  <span
+                     class="block text-2xl font-serif text-brand-dark transition-colors duration-300 group-hover:text-brand-green">ホーム</span>
+               </a>
+            </li>
+            <li class="group border-b border-gray-200 pb-6">
+               <a href="/about-pellet" class="block magnetic-btn">
+                  <span
+                     class="block text-xs font-bold text-brand-green tracking-widest mb-2 transition-transform duration-300 group-hover:translate-x-1">ABOUT
+                     PELLET</span>
+                  <span
+                     class="block text-2xl font-serif text-brand-dark transition-colors duration-300 group-hover:text-brand-green">ペレットとは</span>
+               </a>
+            </li>
+            <li class="group border-b border-gray-200 pb-6">
+               <a href="/#services" class="block magnetic-btn">
+                  <span
+                     class="block text-xs font-bold text-brand-green tracking-widest mb-2 transition-transform duration-300 group-hover:translate-x-1">SERVICES</span>
+                  <span
+                     class="block text-2xl font-serif text-brand-dark transition-colors duration-300 group-hover:text-brand-green">事業内容</span>
+               </a>
+            </li>
+            <li class="pt-8">
+               <a href="/contact"
+                  class="flex items-center justify-center w-full py-4 bg-brand-orange text-white text-base font-medium rounded-full hover:bg-[#b04d13] transition-all shadow-md tracking-widest magnetic-btn">
+                  お問い合わせ
+               </a>
+            </li>
+         </ul>
+      </nav>
    </div>
 
-   <!-- Huge Brand Text -->
-   <div class="w-full border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between items-center">
-    <span class="text-brand-light opacity-30 text-[10px] tracking-[0.2em] font-normal mb-8 md:mb-0">
-     &copy; 2026 KAWANAKA KENCHIKU. ALL RIGHTS RESERVED.
-    </span>
-    <span class="font-serif text-[4vw] md:text-[2vw] text-white/5 tracking-widest pointer-events-none select-none">
-     KAWANAKA KENCHIKU
-    </span>
-   </div>
-  </div>
- </footer>
+
+   <main class="flex-grow pt-24 pb-16 md:pt-32 md:pb-32">
+      <div class="max-w-5xl mx-auto px-6 fade-in-up">
+
+         <div class="text-center mb-12 md:mb-20 fade-in-up">
+            <span
+               class="text-brand-dark font-bold tracking-[0.3em] text-[11px] md:text-[13px] uppercase mb-4 block">Architecture
+               & Electrical</span>
+            <h1 class="font-serif text-3xl md:text-5xl font-medium mb-6 text-brand-dark tracking-wide">建築・電気工事・リフォーム
+            </h1>
+            <p class="text-brand-gray text-[14px] leading-[2] tracking-wider max-w-2xl mx-auto">
+               創業49年の確かな実績による建築技術と、<br>現代の暮らしに最適化した電気工事のノウハウで住まいを総合的にサポートします。
+            </p>
+         </div>
+
+         <div
+            class="h-[400px] md:h-[500px] w-full rounded-3xl overflow-hidden mb-16 md:mb-24 shadow-soft relative fade-in-up bg-[#f0eee9]">
+            <img src="static/images/messageImage_1775812322442.jpg" alt="建築・リフォーム"
+               class="absolute inset-0 w-full h-full object-cover">
+         </div>
+
+         <!-- Section 1: Architecture -->
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mb-16 md:mb-24 items-center fade-in-up">
+            <!-- Image (Left on PC, Top on Mobile) -->
+            <div class="order-1 h-80 w-full rounded-2xl overflow-hidden shadow-soft relative group">
+               <img src="static/images/cba97485-725b-4e8e-b1d6-49f2a41a35f9~1.jpg" alt="新築・リフォーム施工例"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+            </div>
+            <!-- Text (Right on PC, Bottom on Mobile) -->
+            <div class="order-2">
+               <h2 class="font-serif text-2xl font-medium mb-6 text-brand-dark border-b border-gray-100 pb-4">新築・リフォーム事業
+               </h2>
+               <p class="text-brand-gray text-[14px] leading-loose tracking-wider mb-6">
+                  長年培ってきた大工の技術を活かした安心の施工。水回りの修繕から、間取り変更を伴う大規模なリノベーション、新築の設計・施工まで住まいの「器」を確かな技術で築き上げます。地域の風土を理解した暖かく過ごしやすい家づくりをご提案します。
+               </p>
+            </div>
+         </div>
+
+         <!-- Section 2: Electrical Works -->
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mb-16 md:mb-24 items-center fade-in-up">
+            <!-- Text (Left on PC, Bottom on Mobile) -->
+            <div class="order-2 md:order-1">
+               <h2 class="font-serif text-2xl font-medium mb-6 text-brand-dark border-b border-gray-100 pb-4">専門的な電気工事
+               </h2>
+               <p class="text-brand-gray text-[14px] leading-loose tracking-wider mb-6">
+                  現代の住まいに欠かせない電気設備も、豊富な知見を持つ有資格者が対応します。建築と電気、両側面から設計できるのが当社の強みです。
+               </p>
+               <ul class="space-y-4 text-brand-dark text-[14px] font-medium tracking-wider">
+                  <li class="flex items-center"><span
+                        class="w-1.5 h-1.5 bg-brand-green rounded-full mr-4"></span>エコキュートの設置・交換</li>
+                  <li class="flex items-center"><span
+                        class="w-1.5 h-1.5 bg-brand-green rounded-full mr-4"></span>エアコン設置・保守</li>
+                  <li class="flex items-center"><span
+                        class="w-1.5 h-1.5 bg-brand-green rounded-full mr-4"></span>オール電化工事</li>
+                  <li class="flex items-center"><span
+                        class="w-1.5 h-1.5 bg-brand-green rounded-full mr-4"></span>太陽光発電システム・各種電気配線</li>
+               </ul>
+            </div>
+            <!-- Image (Right on PC, Top on Mobile) -->
+            <div class="order-1 md:order-2 h-80 w-full rounded-2xl overflow-hidden shadow-soft relative group">
+               <img src="static/images/FB_IMG_1777363672276.jpg" alt="電気工事施工例"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+            </div>
+         </div>
+
+         <!-- Section 3: PHEV -->
+         <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 mb-16 md:mb-24 items-center fade-in-up">
+            <!-- Image (Left on PC, Top on Mobile) -->
+            <div class="order-1 h-80 w-full rounded-2xl overflow-hidden shadow-soft relative group">
+               <img src="static/images/597950267_4245522692433589_8623134042069803363_n.jpg" alt="PHEV充電設備"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+            </div>
+            <!-- Text (Right on PC, Bottom on Mobile) -->
+            <div class="order-2">
+               <h2 class="font-serif text-2xl font-medium mb-6 text-brand-dark border-b border-gray-100 pb-4">
+                  PHEV・EV充電設備の施工</h2>
+               <p class="text-brand-gray text-[14px] leading-loose tracking-wider mb-6">
+                  電気自動車(EV)やプラグインハイブリッドカー(PHEV)の普及に伴い、ご自宅での充電インフラ工事・コンセント増設等も承っております。長年現場を支えてきた熟練の電気工事士による、安全で確実な配線施工をお約束いたします。
+               </p>
+            </div>
+         </div>
+
+         <!-- Contact CTA -->
+         <div class="text-center mt-16 fade-in-up">
+            <p class="text-brand-gray text-[14px] leading-loose mb-10">
+               住まいの小さなお困りごとから、ペレットストーブと組み合わせたエコなリノベーションまで、<br>お見積りやご相談はいつでも受け付けております。
+            </p>
+            <a href="/contact"
+               class="magnetic-btn inline-flex items-center justify-center px-12 py-5 bg-brand-dark text-white font-medium hover:bg-black transition-all rounded-full tracking-[0.2em] text-[13px] shadow-md">
+               お見積り・お問い合わせ
+            </a>
+         </div>
+
+      </div>
+   </main>
+
+   <footer
+      class="bg-brand-dark text-white pt-20 md:pt-32 pb-10 border-t border-brand-green/20 relative overflow-hidden">
+      <div class="container mx-auto px-6 max-w-7xl relative z-10 fade-in-up">
+         <div class="grid grid-cols-1 md:grid-cols-12 gap-12 lg:gap-8 mb-12 md:mb-20">
+
+            <!-- Brand Info Section -->
+            <div class="md:col-span-5 flex flex-col items-start">
+               <img src="static/images/image_b94ab1.png" alt="川中建築" class="h-10 md:h-12 mb-8 opacity-90 logo-white">
+               <p
+                  class="text-[14px] font-normal text-brand-light opacity-70 leading-[2.2] tracking-widest mb-8 font-serif">
+                  火を囲み、森と暮らす。<br>環境と調和する豊かな住まいをご提案します。
+               </p>
+               <a href="/contact" class="flex items-center space-x-4 group magnetic-btn">
+                  <div
+                     class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:bg-brand-orange group-hover:border-transparent transition-all duration-300">
+                     <svg
+                        class="w-4 h-4 text-white group-hover:transform group-hover:translate-x-1.5 transition-transform duration-300"
+                        fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                           d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                     </svg>
+                  </div>
+                  <span
+                     class="text-[12px] font-medium tracking-[0.2em] uppercase opacity-80 group-hover:opacity-100 transition-opacity">Contact
+                     Us</span>
+               </a>
+            </div>
+
+            <div class="md:col-span-1"></div>
+
+            <!-- Navigation -->
+            <div class="md:col-span-3">
+               <h4 class="text-[10px] font-bold text-brand-green tracking-[0.3em] uppercase mb-8 opacity-80">Menu</h4>
+               <ul class="space-y-5 text-[13px] font-medium tracking-[0.15em] text-brand-light opacity-80">
+                  <li><a href="/"
+                        class=" hover:text-brand-orange magnetic-btn hover:opacity-100 transition-colors inline-block relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-brand-orange hover:after:w-full after:transition-all after:duration-300">ホーム</a>
+                  </li>
+                  <li><a href="/about-pellet"
+                        class=" hover:text-brand-orange magnetic-btn hover:opacity-100 transition-colors inline-block relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-brand-orange hover:after:w-full after:transition-all after:duration-300">ペレットとは</a>
+                  </li>
+                  <li><a href="/#services"
+                        class=" hover:text-brand-orange magnetic-btn hover:opacity-100 transition-colors inline-block relative after:content-[''] after:absolute after:-bottom-1 after:left-0 after:w-0 after:h-[1px] after:bg-brand-orange hover:after:w-full after:transition-all after:duration-300">事業内容</a>
+                  </li>
+               </ul>
+            </div>
+
+            <!-- Information -->
+            <div class="md:col-span-3">
+               <h4 class="text-[10px] font-bold text-brand-green tracking-[0.3em] uppercase mb-8 opacity-80">Information
+               </h4>
+               <ul
+                  class="space-y-4 text-[13px] font-normal text-brand-light opacity-70 leading-loose tracking-widest mb-8">
+                  <li>〒669-6115</li>
+                  <li>兵庫県豊岡市城崎町来日710-1</li>
+                  <li>TEL: <span class="font-serif text-[15px] tracking-normal">0796-32-2264</span></li>
+               </ul>
+               <a href="/privacy-policy"
+                  class="text-[11px] text-brand-light opacity-60 hover:opacity-100 hover:text-brand-orange magnetic-btn transition-colors tracking-widest border-b border-white/20 pb-1">プライバシーポリシー</a>
+            </div>
+         </div>
+
+         <!-- Huge Brand Text -->
+         <div class="w-full border-t border-white/10 pt-10 flex flex-col md:flex-row justify-between items-center">
+            <span class="text-brand-light opacity-30 text-[10px] tracking-[0.2em] font-normal mb-8 md:mb-0">
+               &copy; 2026 KAWANAKA KENCHIKU. ALL RIGHTS RESERVED.
+            </span>
+            <span
+               class="font-serif text-[4vw] md:text-[2vw] text-white/5 tracking-widest pointer-events-none select-none">
+               KAWANAKA KENCHIKU
+            </span>
+         </div>
+      </div>
+   </footer>
 </body>
+
 </html>
