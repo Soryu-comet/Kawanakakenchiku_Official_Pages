@@ -88,21 +88,17 @@ async function returnMaintenancePage(request) {
   if (acceptEncoding.includes('gzip')) {
     const stream = new Response(html).body.pipeThrough(new CompressionStream('gzip'));
     const buffer = await new Response(stream).arrayBuffer();
-
     headers.set('Content-Encoding', 'gzip');
     headers.set('Content-Length', buffer.byteLength.toString());
-
-    return new Response(buffer, { status: 503, headers });
+    return new Response(buffer, { status: 200, headers });
   }
   else if (acceptEncoding.includes('deflate')) {
     const stream = new Response(html).body.pipeThrough(new CompressionStream('deflate'));
     const buffer = await new Response(stream).arrayBuffer();
-
     headers.set('Content-Encoding', 'deflate');
     headers.set('Content-Length', buffer.byteLength.toString());
-
-    return new Response(buffer, { status: 503, headers });
+    return new Response(buffer, { status: 200, headers });
   }
 
-  return new Response(html, { status: 503, headers });
+  return new Response(html, { status: 200, headers });
 }
