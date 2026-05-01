@@ -147,7 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
         menuBtn.addEventListener('click', () => {
             isMenuOpen = !isMenuOpen;
             
-            // アクセシビリティ属性の更新
+
             menuBtn.setAttribute('aria-expanded', isMenuOpen);
             menuBtn.setAttribute('aria-label', isMenuOpen ? 'メニューを閉じる' : 'メニューを開く');
 
@@ -271,13 +271,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 1. Page Transitions ---
+
     const ptOverlay = document.getElementById('page-transition');
     const ptSpinner = document.getElementById('page-transition-spinner');
     
-    // On hard load, do a small intro slide only if it was somehow intercepting
+
     if (ptOverlay) {
-        // If we set it to translate-y-0 dynamically later, ensure we clear it on BFCache back nav
+
         window.addEventListener('pageshow', (e) => {
             if (e.persisted) {
                 ptOverlay.classList.remove('translate-y-0');
@@ -318,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 2. Magnetic Buttons ---
+
     const magneticBtns = document.querySelectorAll('.magnetic-btn');
     magneticBtns.forEach(btn => {
         btn.addEventListener('mousemove', (e) => {
@@ -351,7 +351,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- 3. Split Text Reveal ---
+
     if (typeof SplitType !== 'undefined') {
         const splitElements = document.querySelectorAll('h1, h2:not(.sr-only), h3, h4.font-serif');
         splitElements.forEach(el => {
@@ -380,7 +380,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 4. Ambient Embers Canvas ---
+
     const canvas = document.getElementById('ambient-canvas');
     if (canvas) {
         const ctx = canvas.getContext('2d');
